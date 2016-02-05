@@ -1,6 +1,6 @@
 <?php
 
-namespace Klarsprak\Vendor;
+namespace LixCalculator\Vendor;
 
 /**
  * A PSR-4 compatible class loader.

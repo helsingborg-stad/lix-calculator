@@ -1,0 +1,44 @@
+#lix-calculator-content {
+
+    padding: 15px;
+
+    .row {
+        display: table;
+        width: 100%;
+
+        .col {
+            display: table-cell;
+            width: 50%;
+        }
+    }
+
+    label {
+        display: block;
+        text-transform: uppercase;
+        cursor: normal;
+        font-weight: bold;
+    }
+
+    em.value {
+        display: inline-block;
+        margin-top: 5px;
+        padding: 10px;
+
+        font-size: 3em;
+        line-height: 1;
+        font-style: normal;
+        font-weight: 900;
+    }
+
+    .value.lix {
+        background-color: #ddd;
+        transition: all 300ms;
+    }
+
+    .value.readability {
+        display: inline-block;
+        padding: 0 10px 5px;
+        background-color: #ddd;
+        transition: all 300ms;
+    }
+}

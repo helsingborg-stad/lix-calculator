@@ -14,7 +14,7 @@ var node_modules = 'node_modules/';
 
 // Compile Our Sass
 gulp.task('sass-dist', function() {
-    return gulp.src('source/sass/klarsprakskontroll.scss')
+    return gulp.src('source/sass/lix-calculator.scss')
             .pipe(plumber())
             .pipe(sass())
             .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
@@ -24,7 +24,7 @@ gulp.task('sass-dist', function() {
 });
 
 gulp.task('sass-dev', function() {
-    return gulp.src('source/sass/klarsprakskontroll.scss')
+    return gulp.src('source/sass/lix-calculator.scss')
             .pipe(plumber())
             .pipe(sass())
             .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
@@ -37,9 +37,9 @@ gulp.task('scripts', function() {
     return gulp.src([
                 'source/js/**/*.js',
             ])
-            .pipe(concat('klarsprakskontroll.dev.js'))
+            .pipe(concat('lix-calculator.dev.js'))
             .pipe(gulp.dest('dist/js'))
-            .pipe(rename('klarsprakskontroll.min.js'))
+            .pipe(rename('lix-calculator.min.js'))
             .pipe(uglify())
             .pipe(gulp.dest('dist/js'));
 });

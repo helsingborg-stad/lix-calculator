@@ -1,7 +1,7 @@
 {
-  "name": "Klarsprakskontroll",
-  "version": "0.1.0",
-  "description": "A plugin to validate post content agains the Helsingborg Stad Klarspråk policy",
+  "name": "Lix-Calculator",
+  "version": "1.0.0",
+  "description": "A plugin that calculates a posts lix value.",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

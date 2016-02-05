@@ -1,9 +1,14 @@
 <?php
 
-namespace Klarsprakskontroll\Helper;
+namespace LixCalculator\Helper;
 
 class Wp
 {
+    /**
+     * Datermines if we're on add or edit page in wp admin
+     * @param  mixed    $type    (false, new or edit) Check for specific new/edit type
+     * @return boolean
+     */
     public static function isAdminEditPage($type = false)
     {
         global $pagenow;
@@ -38,43 +43,28 @@ class Wp
      * @param  boolean $error  Show errors or not
      * @return string          The path to the template to use
      */
-    public static function getTemplate($prefix = '', $slug = '', $error = true)
+    public static function getTemplate($template, $error = true)
     {
-        $paths = apply_filters('Modularity/Module/TemplatePath', array(
+        $paths = apply_filters('LixCalculator/TemplatePath', array(
             get_stylesheet_directory() . '/templates/',
             get_template_directory() . '/templates/',
-            MODULARITY_PATH . 'templates/',
+            LIXCALCULATOR_PATH . 'templates/',
         ));
 
-        $slug = apply_filters('Modularity/TemplatePathSlug', $slug ? $slug . '/' : '', $prefix);
-        $prefix = $prefix ? '-'.$prefix : '';
+        $prefix = apply_filters('LixCalculator/TemplatePrefix', 'klarsprakskontroll');
 
         foreach ($paths as $path) {
-            $file = $path . $slug . 'modularity' . $prefix.'.php';
+            $file = $path . $prefix . '-' . $template . '.php';
 
             if (file_exists($file)) {
                 return $file;
             }
         }
 
-        error_log('Modularity: Template ' . $slug . 'evaluate' . $prefix . '.php' . ' not found in any of the paths: ' . var_export($paths, true));
+        error_log('Lix Calculator: Template ' . $prefix . '-' . $template . '.php' . ' not found in any of the paths: ' . var_export($paths, true));
 
         if ($error) {
-            trigger_error('Modularity: Template ' . $slug . 'evaluate' . $prefix . '.php' . ' not found in any of the paths: ' . var_export($paths, true), E_USER_WARNING);
+            trigger_error('Lix Calculator: Template ' . $prefix . '-' . $template . '.php' . ' not found in any of the paths: ' . var_export($paths, true), E_USER_WARNING);
         }
-    }
-
-    /**
-     * Gets site information
-     * @return array
-     */
-    public static function getSiteInfo()
-    {
-        $siteInfo = array(
-            'name' => get_bloginfo('name'),
-            'url' => esc_url(home_url('/')),
-        );
-
-        return $siteInfo;
     }
 }

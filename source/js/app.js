@@ -1,1 +1,1 @@
-var Klarsprakskontroll = {};
+var LixCalculator = {};

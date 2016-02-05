@@ -1,16 +1,16 @@
-Klarsprakskontroll = Klarsprakskontroll || {};
-Klarsprakskontroll.Lix = Klarsprakskontroll.Lix || {};
+LixCalculator = LixCalculator || {};
+LixCalculator.Lix = LixCalculator.Lix || {};
 
-Klarsprakskontroll.Lix.Calculator = (function ($) {
+LixCalculator.Lix.Calculator = (function ($) {
+
+    var target = '#lix-calculator-content';
+
+    var typingTimer;
+    var typingTimerInterval = 500;
 
     function Calculator() {
-        this.init();
         this.bindEvents();
     }
-
-    Calculator.prototype.init = function () {
-        $('#post-status-info tr').prepend('<td id="wp-lix-info">Lix: <span id="wp-lix-value"></span></td>');
-    };
 
     /**
      * Binds the lix calculator to the content editor and triggers calculation when text changes
@@ -19,21 +19,59 @@ Klarsprakskontroll.Lix.Calculator = (function ($) {
     Calculator.prototype.bindEvents = function () {
         $(window).load(function () {
             var contentEditor = tinymce.get('content');
+            this.calculateAndOutput(contentEditor.getContent({format: 'text'}));
 
-            var text = contentEditor.getContent({format: 'text'});
-            var data = this.parseText(text);
-            var lix = this.calculate(data.words, data.longWords, data.sentences);
-
-            this.output(lix);
-
-            contentEditor.on('input', function () {
-                text = contentEditor.getContent({format: 'text'});
-                data = this.parseText(text);
-                lix = this.calculate(data.words, data.longWords, data.sentences);
-
-                this.output(lix);
+            contentEditor.on('keyup', function () {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(function () {
+                    this.calculateAndOutput(contentEditor.getContent({format: 'text'}));
+                }.bind(this), typingTimerInterval);
             }.bind(this));
+
         }.bind(this));
+    };
+
+    /**
+     * Updates the lix value based on given text
+     * @param  {string} text Text
+     * @return {void}
+     */
+    Calculator.prototype.calculateAndOutput = function (text) {
+        var data = this.parseText(text);
+        var lix = this.calculate(data.words, data.longWords, data.sentences);
+
+        var wordFrequency = this.getWordFrequency(text);
+
+        this.output(lix);
+    };
+
+    /**
+     * Gets the word frequency as an array "word" => "occurances"
+     * @param  {string} text The text to analyse
+     * @return {object}
+     */
+    Calculator.prototype.getWordFrequency = function(text) {
+        text = text.toLowerCase();
+
+        var words = text.split(/[\s*\.*\,\;\+?\#\|:\-\/\\\[\]\(\)\{\}$%&0-9*]/);
+        var frequency = [];
+
+        $.each(words, function (index, word) {
+            if (word.length < 2) {
+                return;
+            }
+
+            if (frequency[word]) {
+                frequency[word].count++;
+            } else {
+                frequency[word] = {
+                    word: word,
+                    count: 1
+                };
+            }
+        });
+
+        return frequency;
     };
 
     /**
@@ -74,47 +112,63 @@ Klarsprakskontroll.Lix.Calculator = (function ($) {
      * @return {double}             The lix value
      */
     Calculator.prototype.calculate = function (words, longWords, sentences) {
+        if (words == 0) {
+            return 'NA';
+        }
+
         var lix = (words/sentences) + ((longWords/words) * 100);
         return lix.toFixed(2);
     };
 
-    Calculator.prototype.getCategory = function (lix, useParentheses, useColor) {
+    Calculator.prototype.getReadability = function (lix) {
         useParentheses = typeof useParentheses !== 'undefined' ? useParentheses : false;
         useColor = typeof useColor !== 'undefined' ? useColor : false;
 
-        var value;
-        var color;
+        var value = 'NA';
+        var bgColor = '#ddd';
+        var textColor = '#000';
 
         if (lix < 30) {
             value = 'Mycket lättläst';
-            color = '#098400';
-        } else if (lix >= 30 && lix <= 39) {
+            bgColor = '#098400';
+            textColor = '#fff';
+        } else if (lix > 29 && lix < 41) {
             value = 'Lättläst';
-            color = '#5DAE00';
-        } else if (lix >= 40 && lix <= 49) {
+            bgColor = '#5DAE00';
+            textColor = '#fff';
+        } else if (lix > 40 && lix < 51) {
             value = 'Medelsvår';
-            color = '#FFDC00';
-        } else if (lix >= 50 && lix <= 59) {
-            value = 'Svår';
-            color = '#FF9600';
-        } else if (lix >= 60) {
-            value = 'Mycket svår';
-            color = '#FF1300';
+            bgColor = '#FFDC00';
+            textColor = '#000';
+        } else if (lix > 50 && lix < 61) {
+            value = 'Svårläst';
+            bgColor = '#FF9600';
+            textColor = '#000';
+        } else if (lix > 60) {
+            value = 'Mycket svårläst';
+            bgColor = '#FF1300';
+            textColor = '#fff';
         }
 
-        if (useParentheses === true) {
-            value = '(' + value + ')';
-        }
-
-        if (useColor === true) {
-            value = '<em style="background-color:' + color + '">' + value + '</em>';
-        }
-
-        return value;
+        return {
+            'value': value,
+            'bgColor': bgColor,
+            'textColor': textColor
+        };
     };
 
     Calculator.prototype.output = function (lix) {
-        $('#wp-lix-value').html(lix + ' ' + this.getCategory(lix, false, true));
+        var readability = this.getReadability(lix);
+
+        $(target).find('.value.lix').html(lix).css({
+            'backgroundColor': readability.bgColor,
+            'color': readability.textColor
+        });
+
+        $(target).find('.value.readability').html(readability.value).css({
+            'backgroundColor': readability.bgColor,
+            'color': readability.textColor
+        });
     };
 
     return new Calculator();
