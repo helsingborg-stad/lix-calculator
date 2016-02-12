@@ -1,0 +1,13 @@
+{
+    "name": "helsingborg-stad/lix-calculator",
+    "description": "WordPress plugin that calculates the lix value of your post's content.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kristoffer Svanmark",
+            "email": "kristoffer.svanmark@lexiconitkonsult.se"
+        }
+    ],
+    "require": {}
+}
