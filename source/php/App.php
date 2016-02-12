@@ -13,8 +13,8 @@ class App
     public function enqueue()
     {
         if (\LixCalculator\Helper\Wp::isAdminEditPage()) {
-            wp_enqueue_style('lix-calculator', LIXCALCULATOR_URL . '/dist/css/lix-calculator.dev.css');
-            wp_enqueue_script('lix-calculator', LIXCALCULATOR_URL . '/dist/js/lix-calculator.dev.js', array(), '1.0.0', true);
+            wp_enqueue_style('lix-calculator', LIXCALCULATOR_URL . '/dist/css/lix-calculator.min.css');
+            wp_enqueue_script('lix-calculator', LIXCALCULATOR_URL . '/dist/js/lix-calculator.min.js', array(), '1.0.0', true);
         }
     }
 
