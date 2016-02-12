@@ -7,6 +7,7 @@
  * Version: 1.0.0
  * Author: Kristoffer Svanmark
  * Author URI: https://github.com/helsingborg-stad
+ * Text Domain: lix-calculator
  *
  * Copyright (C) 2015
  */
@@ -16,7 +17,7 @@ define('LIXCALCULATOR_URL', plugins_url('', __FILE__));
 
 define('LIXCALCULATOR_TEMPLATE_PATH', LIXCALCULATOR_PATH . 'templates/');
 
-load_plugin_textdomain('lixcalculator', false, plugin_basename(dirname(__FILE__)) . '/languages');
+load_plugin_textdomain('lix-calculator', false, plugin_basename(dirname(__FILE__)) . '/languages');
 
 require_once LIXCALCULATOR_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
 //require_once KLARSPRAK_PATH . 'Public.php';

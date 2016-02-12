@@ -51,7 +51,7 @@ class Wp
             LIXCALCULATOR_PATH . 'templates/',
         ));
 
-        $prefix = apply_filters('LixCalculator/TemplatePrefix', 'klarsprakskontroll');
+        $prefix = apply_filters('LixCalculator/TemplatePrefix', 'lix');
 
         foreach ($paths as $path) {
             $file = $path . $prefix . '-' . $template . '.php';

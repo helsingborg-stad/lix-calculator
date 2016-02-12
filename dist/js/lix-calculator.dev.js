@@ -20,6 +20,10 @@ LixCalculator.Lix.Calculator = (function ($) {
      */
     Calculator.prototype.bindEvents = function () {
         $(window).load(function () {
+            if ($('#content').length === 0) {
+                return;
+            }
+
             var contentEditor = tinymce.get('content');
             this.calculateAndOutput(contentEditor.getContent({format: 'text'}));
 
@@ -115,7 +119,7 @@ LixCalculator.Lix.Calculator = (function ($) {
      */
     Calculator.prototype.calculate = function (words, longWords, sentences) {
         if (words == 0) {
-            return 'NA';
+            return LixCalculatorLang.na;
         }
 
         var lix = (words/sentences) + ((longWords/words) * 100);
@@ -126,28 +130,28 @@ LixCalculator.Lix.Calculator = (function ($) {
         useParentheses = typeof useParentheses !== 'undefined' ? useParentheses : false;
         useColor = typeof useColor !== 'undefined' ? useColor : false;
 
-        var value = 'NA';
+        var value = LixCalculatorLang.na;
         var bgColor = '#ddd';
         var textColor = '#000';
 
         if (lix < 30) {
-            value = 'Mycket lättläst';
+            value = LixCalculatorLang.very_easy;
             bgColor = '#098400';
             textColor = '#fff';
         } else if (lix > 29 && lix < 41) {
-            value = 'Lättläst';
+            value = LixCalculatorLang.easy;
             bgColor = '#5DAE00';
             textColor = '#fff';
         } else if (lix > 40 && lix < 51) {
-            value = 'Medelsvår';
+            value = LixCalculatorLang.moderate;
             bgColor = '#FFDC00';
             textColor = '#000';
         } else if (lix > 50 && lix < 61) {
-            value = 'Svårläst';
+            value = LixCalculatorLang.hard;
             bgColor = '#FF9600';
             textColor = '#000';
         } else if (lix > 60) {
-            value = 'Mycket svårläst';
+            value = LixCalculatorLang.very_hard;
             bgColor = '#FF1300';
             textColor = '#fff';
         }
