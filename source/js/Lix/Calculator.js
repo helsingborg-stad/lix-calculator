@@ -9,7 +9,14 @@ LixCalculator.Lix.Calculator = (function ($) {
     var typingTimerInterval = 500;
 
     function Calculator() {
-        this.bindEvents();
+        $(window).load(function () {
+            this.bindEvents();
+        }.bind(this));
+
+        $('#content-tmce, #content-html').on('click', function () {
+            console.log('Rebind');
+            this.bindEvents();
+        }.bind(this));
     }
 
     /**
@@ -17,21 +24,38 @@ LixCalculator.Lix.Calculator = (function ($) {
      * @return {void}
      */
     Calculator.prototype.bindEvents = function () {
-        $(window).load(function () {
-            if ($('#content').length === 0) {
-                return;
+        if ($('#content').length === 0) {
+            return;
+        }
+
+        var visualContentEditor, textContentEditor;
+
+        // Visual editor
+        setTimeout(function () {
+            if (tinymce.get('content')) {
+                visualContentEditor = tinymce.get('content');
+                visualContentEditor.off('keyup');
+                this.calculateAndOutput(visualContentEditor.getContent({format: 'text'}));
+
+                visualContentEditor.on('keyup', function () {
+                    clearTimeout(typingTimer);
+                    typingTimer = setTimeout(function () {
+                        this.calculateAndOutput(visualContentEditor.getContent({format: 'text'}));
+                    }.bind(this), typingTimerInterval);
+                }.bind(this));
             }
+        }.bind(this), 1000);
 
-            var contentEditor = tinymce.get('content');
-            this.calculateAndOutput(contentEditor.getContent({format: 'text'}));
+        // Text editor
+        textContentEditor = $('textarea#content');
+        textContentEditor.off('keyup');
+        this.calculateAndOutput(textContentEditor.val().replace(/<\/?[^>]+(>|$)/g, ""));
 
-            contentEditor.on('keyup', function () {
-                clearTimeout(typingTimer);
-                typingTimer = setTimeout(function () {
-                    this.calculateAndOutput(contentEditor.getContent({format: 'text'}));
-                }.bind(this), typingTimerInterval);
-            }.bind(this));
-
+        textContentEditor.on('keyup', function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(function () {
+                this.calculateAndOutput(textContentEditor.val().replace(/<\/?[^>]+(>|$)/g, ""));
+            }.bind(this), typingTimerInterval);
         }.bind(this));
     };
 
