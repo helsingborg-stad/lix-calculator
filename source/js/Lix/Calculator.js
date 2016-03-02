@@ -147,6 +147,11 @@ LixCalculator.Lix.Calculator = (function ($) {
         return lix.toFixed(2);
     };
 
+    /**
+     * Get the readabillity stats
+     * @param  {integer} lix
+     * @return {object}
+     */
     Calculator.prototype.getReadability = function (lix) {
         useParentheses = typeof useParentheses !== 'undefined' ? useParentheses : false;
         useColor = typeof useColor !== 'undefined' ? useColor : false;
@@ -184,6 +189,10 @@ LixCalculator.Lix.Calculator = (function ($) {
         };
     };
 
+    /**
+     * Outputs the stats
+     * @return {void}
+     */
     Calculator.prototype.output = function (lix) {
         var readability = this.getReadability(lix);
 
