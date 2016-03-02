@@ -14,7 +14,6 @@ LixCalculator.Lix.Calculator = (function ($) {
         }.bind(this));
 
         $('#content-tmce, #content-html').on('click', function () {
-            console.log('Rebind');
             this.bindEvents();
         }.bind(this));
     }
