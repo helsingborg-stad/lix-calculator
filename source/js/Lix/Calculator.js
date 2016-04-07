@@ -121,13 +121,13 @@ LixCalculator.Lix.Calculator = (function ($) {
             'characters': text.length,
 
             // Words in text
-            'words': text.trim().match(/\S+/g).length,
+            'words': (text.trim().length > 0 && text.trim().match(/\S+/g) !== null) ? text.trim().match(/\S+/g).length : 0,
 
             // Long words (7 or more characters) in text
-            'longWords': (text.trim().match(/(\S+){7,}/g) != null) ? text.trim().match(/[\S+]{7,}/g).length : 0,
+            'longWords': (text.trim().length > 0 && text.trim().match(/(\S+){7,}/g) !== null) ? text.trim().match(/[\S+]{7,}/g).length : 0,
 
             // Sentences in text
-            'sentences': text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length
+            'sentences': (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0
         };
     };
 

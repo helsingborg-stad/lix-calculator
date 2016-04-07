@@ -16,7 +16,6 @@ LixCalculator.Lix.Calculator = (function ($) {
         }.bind(this));
 
         $('#content-tmce, #content-html').on('click', function () {
-            console.log('Rebind');
             this.bindEvents();
         }.bind(this));
     }
@@ -124,13 +123,13 @@ LixCalculator.Lix.Calculator = (function ($) {
             'characters': text.length,
 
             // Words in text
-            'words': text.trim().match(/\S+/g).length,
+            'words': (text.trim().length > 0 && text.trim().match(/\S+/g) !== null) ? text.trim().match(/\S+/g).length : 0,
 
             // Long words (7 or more characters) in text
-            'longWords': (text.trim().match(/(\S+){7,}/g) != null) ? text.trim().match(/[\S+]{7,}/g).length : 0,
+            'longWords': (text.trim().length > 0 && text.trim().match(/(\S+){7,}/g) !== null) ? text.trim().match(/[\S+]{7,}/g).length : 0,
 
             // Sentences in text
-            'sentences': text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length
+            'sentences': (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0
         };
     };
 
@@ -150,6 +149,11 @@ LixCalculator.Lix.Calculator = (function ($) {
         return lix.toFixed(2);
     };
 
+    /**
+     * Get the readabillity stats
+     * @param  {integer} lix
+     * @return {object}
+     */
     Calculator.prototype.getReadability = function (lix) {
         useParentheses = typeof useParentheses !== 'undefined' ? useParentheses : false;
         useColor = typeof useColor !== 'undefined' ? useColor : false;
@@ -187,6 +191,10 @@ LixCalculator.Lix.Calculator = (function ($) {
         };
     };
 
+    /**
+     * Outputs the stats
+     * @return {void}
+     */
     Calculator.prototype.output = function (lix) {
         var readability = this.getReadability(lix);
 
