@@ -30,13 +30,15 @@ class App
 
     public function addMetaBox()
     {
+        $postTypes = get_post_types();
+
         add_meta_box(
             'lix-calculator',
             __('Readability', 'lix-calculator'),
             function () {
                 include \LixCalculator\Helper\Wp::getTemplate('metabox');
             },
-            array('post', 'page'),
+            array_keys($postTypes),
             'normal',
             'high',
             null
