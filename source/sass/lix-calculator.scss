@@ -6,6 +6,10 @@
         display: table;
         width: 100%;
 
+        & + .row {
+            margin-top: 15px;
+        }
+
         .col {
             display: table-cell;
             width: 50%;
@@ -15,8 +19,16 @@
     label {
         display: block;
         text-transform: uppercase;
-        cursor: normal;
+        cursor: default;
         font-weight: bold;
+
+        small {
+            display: block;
+            text-transform: none;
+            font-weight: normal;
+            font-size: .9em;
+            color: #999;
+        }
     }
 
     em.value {
@@ -30,12 +42,14 @@
         font-weight: 900;
     }
 
-    .value.lix {
+    .value.lix,
+    .value.parahraph-ratio {
         background-color: #ddd;
         transition: all 300ms;
     }
 
-    .value.readability {
+    .value.readability,
+    .value.paragraph-ratio-rating {
         display: inline-block;
         padding: 0 10px 5px;
         background-color: #ddd;

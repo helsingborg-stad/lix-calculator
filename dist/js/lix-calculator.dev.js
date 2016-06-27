@@ -1,16 +1,16 @@
 var LixCalculator = {};
 
 LixCalculator = LixCalculator || {};
-LixCalculator.Lix = LixCalculator.Lix || {};
+LixCalculator.Modules = LixCalculator.Modules || {};
 
-LixCalculator.Lix.Calculator = (function ($) {
+LixCalculator.Modules.Lix = (function ($) {
 
     var target = '#lix-calculator-content';
 
     var typingTimer;
     var typingTimerInterval = 500;
 
-    function Calculator() {
+    function Lix() {
         $(window).load(function () {
             this.bindEvents();
         }.bind(this));
@@ -21,10 +21,10 @@ LixCalculator.Lix.Calculator = (function ($) {
     }
 
     /**
-     * Binds the lix calculator to the content editor and triggers calculation when text changes
+     * Binds the lix Lix to the content editor and triggers calculation when text changes
      * @return {void}
      */
-    Calculator.prototype.bindEvents = function () {
+    Lix.prototype.bindEvents = function () {
         if ($('#content').length === 0) {
             return;
         }
@@ -65,13 +65,51 @@ LixCalculator.Lix.Calculator = (function ($) {
      * @param  {string} text Text
      * @return {void}
      */
-    Calculator.prototype.calculateAndOutput = function (text) {
+    Lix.prototype.calculateAndOutput = function (text) {
         var data = this.parseText(text);
+
         var lix = this.calculate(data.words, data.longWords, data.sentences);
+        var paragraphRatio = this.paragraphRatio(data.sentences, data.paragraphs);
 
         var wordFrequency = this.getWordFrequency(text);
 
         this.output(lix);
+    };
+
+    Lix.prototype.paragraphRatio = function(sentences, paragraphs) {
+        var ratio = sentences/paragraphs;
+        ratio = ratio.toFixed(2);
+
+        if (ratio == 'NaN') {
+            $(target).find('.value.parahraph-ratio, .value.paragraph-ratio-rating').html(LixCalculatorLang.na).attr('style', '');
+            return;
+        }
+
+        var ratioBg = '#5DAE00';
+        var ratioText = '#fff';
+        var ratioRating = LixCalculatorLang.good;
+
+        if (ratio < 1) {
+            ratioBg = '#FF1300';
+            ratioText = '#fff';
+            ratioRating = LixCalculatorLang.low;
+        }
+
+        if (ratio > 20) {
+            ratioBg = '#FF1300';
+            ratioText = '#fff';
+            ratioRating = LixCalculatorLang.high;
+        }
+
+        $(target).find('.value.parahraph-ratio').html(ratio).css({
+            'backgroundColor': ratioBg,
+            'color': ratioText
+        });
+
+        $(target).find('.value.paragraph-ratio-rating').html(ratioRating).css({
+            'backgroundColor': ratioBg,
+            'color': ratioText
+        });
     };
 
     /**
@@ -79,7 +117,7 @@ LixCalculator.Lix.Calculator = (function ($) {
      * @param  {string} text The text to analyse
      * @return {object}
      */
-    Calculator.prototype.getWordFrequency = function(text) {
+    Lix.prototype.getWordFrequency = function(text) {
         text = text.toLowerCase();
 
         var words = text.split(/[\s*\.*\,\;\+?\#\|:\-\/\\\[\]\(\)\{\}$%&0-9*]/);
@@ -108,13 +146,14 @@ LixCalculator.Lix.Calculator = (function ($) {
      * @param  {string} text         The text to parse
      * @return {object}
      */
-    Calculator.prototype.parseText = function (text) {
+    Lix.prototype.parseText = function (text) {
         if (!text) {
             return {
                 'characters': 0,
                 'words': 0,
                 'longWords': 0,
-                'sentences': 0
+                'sentences': 0,
+                'paragraphs': 0
             };
         }
 
@@ -129,7 +168,9 @@ LixCalculator.Lix.Calculator = (function ($) {
             'longWords': (text.trim().length > 0 && text.trim().match(/(\S+){7,}/g) !== null) ? text.trim().match(/[\S+]{7,}/g).length : 0,
 
             // Sentences in text
-            'sentences': (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0
+            'sentences': (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0,
+
+            'paragraphs': (text.trim().length > 0) ? text.trim().split(/[\r\n]+/).length : 0,
         };
     };
 
@@ -140,8 +181,8 @@ LixCalculator.Lix.Calculator = (function ($) {
      * @param  {integer} sentences  Sentences count
      * @return {double}             The lix value
      */
-    Calculator.prototype.calculate = function (words, longWords, sentences) {
-        if (words == 0) {
+    Lix.prototype.calculate = function (words, longWords, sentences) {
+        if (words === 0) {
             return LixCalculatorLang.na;
         }
 
@@ -154,7 +195,7 @@ LixCalculator.Lix.Calculator = (function ($) {
      * @param  {integer} lix
      * @return {object}
      */
-    Calculator.prototype.getReadability = function (lix) {
+    Lix.prototype.getReadability = function (lix) {
         useParentheses = typeof useParentheses !== 'undefined' ? useParentheses : false;
         useColor = typeof useColor !== 'undefined' ? useColor : false;
 
@@ -195,7 +236,7 @@ LixCalculator.Lix.Calculator = (function ($) {
      * Outputs the stats
      * @return {void}
      */
-    Calculator.prototype.output = function (lix) {
+    Lix.prototype.output = function (lix) {
         var readability = this.getReadability(lix);
 
         $(target).find('.value.lix').html(lix).css({
@@ -209,6 +250,6 @@ LixCalculator.Lix.Calculator = (function ($) {
         });
     };
 
-    return new Calculator();
+    return new Lix();
 
 })(jQuery);
