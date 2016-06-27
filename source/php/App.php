@@ -34,6 +34,9 @@ class App
     public function addMetaBox()
     {
         $postTypes = get_post_types();
+        $postTypes = array_filter($postTypes, function ($item) {
+            return post_type_supports($item, 'editor');
+        });
 
         add_meta_box(
             'lix-calculator',
