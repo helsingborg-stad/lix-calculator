@@ -95,7 +95,7 @@ LixCalculator.Modules.Lix = (function ($) {
             ratioRating = LixCalculatorLang.low;
         }
 
-        if (ratio > 20) {
+        if (ratio >= 5) {
             ratioBg = '#FF1300';
             ratioText = '#fff';
             ratioRating = LixCalculatorLang.high;
