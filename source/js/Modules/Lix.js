@@ -155,6 +155,9 @@ LixCalculator.Modules.Lix = (function ($) {
             };
         }
 
+        // Remove shortcodes
+        text = text.replace(/\[(.*)\]/g, '');
+
         return {
             // Characters in text
             'characters': text.length,
