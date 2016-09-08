@@ -2,18 +2,14 @@
 
     padding: 15px;
 
-    .row {
-        display: table;
-        width: 100%;
+    .col {
+        display: inline-block;
+        vertical-align: top;
+        min-width: 150px;
+    }
 
-        & + .row {
-            margin-top: 15px;
-        }
-
-        .col {
-            display: table-cell;
-            width: 50%;
-        }
+    .col + .col {
+        padding-left: 15px;
     }
 
     label {
@@ -54,5 +50,16 @@
         padding: 0 10px 5px;
         background-color: #ddd;
         transition: all 300ms;
+    }
+}
+
+#side-sortables #lix-calculator-content {
+    .col {
+        display: block;
+    }
+
+    .col + .col {
+        padding-left: 0;
+        padding-top: 15px;
     }
 }
