@@ -17,16 +17,27 @@ class App
 
             wp_register_script('lix-calculator', LIXCALCULATOR_URL . '/dist/js/lix-calculator.dev.js', array(), '1.0.0', true);
             wp_localize_script('lix-calculator', 'LixCalculatorLang', array(
-                'very_hard' => __('Very hard', 'lix-calculator'),
-                'hard' => __('Hard', 'lix-calculator'),
-                'moderate' => __('Moderate', 'lix-calculator'),
-                'easy' => __('Easy', 'lix-calculator'),
-                'very_easy' => __('Very easy', 'lix-calculator'),
-                'na' => __('n/a', 'lix-calculator'),
-                'good' => __('Good', 'lix-calculator'),
-                'low' => __('Low', 'lix-calculator'),
-                'high' => __('High', 'lix-calculator')
+                'lix' => array(
+                    'title' => __('Readability', 'lix-calculator'),
+                    'description' => __('Lix value', 'lix-calculator'),
+                    'very_hard' => __('Very hard', 'lix-calculator'),
+                    'hard' => __('Hard', 'lix-calculator'),
+                    'moderate' => __('Moderate', 'lix-calculator'),
+                    'easy' => __('Easy', 'lix-calculator'),
+                    'very_easy' => __('Very easy', 'lix-calculator'),
+                ),
+
+                'paragraph' => array(
+                    'title' => __('Paragrah ratio', 'lix-calculator'),
+                    'description' => __('sentences', 'lix-calculator') . '/' . __('paragraphs', 'lix-calculator'),
+                    'good' => __('Good', 'lix-calculator'),
+                    'low' => __('Low', 'lix-calculator'),
+                    'high' => __('High', 'lix-calculator')
+                ),
+
+                'na' => __('n/a', 'lix-calculator')
             ));
+
             wp_enqueue_script('lix-calculator');
         }
     }
