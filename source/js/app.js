@@ -95,9 +95,10 @@ var LixCalculator = (function ($) {
 
     /**
      * Adds a formula to the lix calculator
-     * @param {object} obj         The formula object
-     * @param {string} title       Formula title
-     * @param {string} description Formula description
+     * @param {object}  obj         The formula object
+     * @param {string}  title       Formula title
+     * @param {string}  description Formula description
+     * @param {integer} priority    Priority order for output
      */
     LixCalculator.prototype.addFormula = function (obj, title, description, priority) {
         if (typeof priority == 'undefined') {
