@@ -29,6 +29,9 @@ LixCalculator.Formula.Lix = (function ($) {
     Lix.prototype.output = function(lix, readability) {
         var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.lix.title);
 
+        LixCalculator.Formula.Total.appendTotal(100-lix, 100);
+        lix = 100 - lix + '%';
+
         $(target).find('em.value').html(lix).css({
             'backgroundColor': readability.bgColor,
             'color': readability.textColor

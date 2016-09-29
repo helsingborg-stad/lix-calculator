@@ -48,6 +48,9 @@ LixCalculator.Formula.Paragraph = (function ($) {
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
+        LixCalculator.Formula.Total.appendTotal(ratio * 100, 100);
+        ratio = (ratio * 100).toFixed(2) + '%';
+
         $(target).find('em.value').html(ratio).css({
             'backgroundColor': ratioBg,
             'color': ratioText

@@ -35,6 +35,14 @@ class App
                     'high' => __('High', 'lix-calculator')
                 ),
 
+                'total' => array(
+                    'title' => __('Total', 'lix-calculator'),
+                    'description' => __('Total score', 'lix-calculator'),
+                    'bad' => __('Bad', 'lix-calculator'),
+                    'ok' => __('Ok', 'lix-calculator'),
+                    'good' => __('Good', 'lix-calculator')
+                ),
+
                 'na' => __('n/a', 'lix-calculator')
             ));
 
