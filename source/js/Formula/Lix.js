@@ -109,7 +109,7 @@ LixCalculator.Formula.Lix = (function ($) {
             longWords: (text.trim().length > 0 && text.trim().match(/(\S+){7,}/g) !== null) ? text.trim().match(/[\S+]{7,}/g).length : 0,
 
             // Sentences in text
-            sentences: (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0,
+            sentences: LixCalculator.getSentences(text),
         };
     };
 

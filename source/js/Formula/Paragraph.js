@@ -16,9 +16,16 @@ LixCalculator.Formula.Paragraph = (function ($) {
         var params = this.getParamsFromText(content);
         var ratio = this.calculate(params.sentences, params.paragraphs);
 
+        console.log(params);
+
         this.output(ratio);
     };
 
+    /**
+     * Output paragraph calculation result
+     * @param  {integer} ratio Ratio
+     * @return {void}
+     */
     Paragraph.prototype.output = function(ratio) {
         var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.paragraph.title);
 
@@ -54,6 +61,12 @@ LixCalculator.Formula.Paragraph = (function ($) {
         });
     };
 
+    /**
+     * Calculate
+     * @param  {integer} sentences  num sentences
+     * @param  {integer} paragraphs num paragraphs
+     * @return {double}             Paragraph ratio
+     */
     Paragraph.prototype.calculate = function(sentences, paragraphs) {
         var ratio = sentences/paragraphs;
         ratio = ratio.toFixed(2);
@@ -68,8 +81,8 @@ LixCalculator.Formula.Paragraph = (function ($) {
      */
     Paragraph.prototype.getParamsFromText = function(text) {
         return {
-            sentences: (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0,
-            paragraphs: (text.trim().length > 0) ? text.trim().split(/[\r\n]+/).length : 0,
+            sentences: LixCalculator.getSentences(text),
+            paragraphs: (text.trim().length > 0) ? text.trim().split(/[\r\n][\r\n]+/).length : 0,
         };
     };
 

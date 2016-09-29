@@ -34,13 +34,13 @@ var LixCalculator = (function ($) {
             if (tinymce.get('content')) {
                 visualContentEditor = tinymce.get('content');
                 visualContentEditor.off('keyup');
-                this.calculate('visual', visualContentEditor.getContent({format: 'text'}));
+                this.calculate('visual', this.trimContent(visualContentEditor.getContent({format: 'text'})));
 
                 visualContentEditor.on('keyup', function () {
                     clearTimeout(typingTimer);
                     typingTimer = setTimeout(function () {
 
-                        this.calculate('visual', visualContentEditor.getContent({format: 'text'}));
+                        this.calculate('visual', this.trimContent(visualContentEditor.getContent({format: 'text'})));
 
                     }.bind(this), typingTimerInterval);
                 }.bind(this));
@@ -53,17 +53,28 @@ var LixCalculator = (function ($) {
          */
         textContentEditor = $('textarea#content');
         textContentEditor.off('keyup');
-        this.calculate('text', textContentEditor.val().replace(/<\/?[^>]+(>|$)/g, ""));
+        this.calculate('text', this.trimContent(textContentEditor.val()));
 
         textContentEditor.on('keyup', function () {
             clearTimeout(typingTimer);
             typingTimer = setTimeout(function () {
 
-                this.calculate('text', textContentEditor.val().replace(/<\/?[^>]+(>|$)/g, ""));
+                this.calculate('text', this.trimContent(textContentEditor.val()));
 
             }.bind(this), typingTimerInterval);
         }.bind(this));
 
+    };
+
+    /**
+     * Trim content before calculations
+     * @param  {string} content Content to trim
+     * @return {string}         Trimmed content
+     */
+    LixCalculator.prototype.trimContent = function(content) {
+        content = content.replace(/<\/?[^>]+(>|$)/g, '');
+        content = content.replace(/\t/g, '');
+        return content;
     };
 
     /**
@@ -110,6 +121,10 @@ var LixCalculator = (function ($) {
             .replace(/\-\-+/g, '-')         // Replace multiple - with single -
             .replace(/^-+/, '')             // Trim - from start of text
             .replace(/-+$/, '');            // Trim - from end of text
+    };
+
+    LixCalculator.prototype.getSentences = function(text) {
+        return (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0;
     };
 
     return new LixCalculator();
