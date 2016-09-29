@@ -268,8 +268,6 @@ LixCalculator.Formula.Paragraph = (function ($) {
         var params = this.getParamsFromText(content);
         var ratio = this.calculate(params.sentences, params.paragraphs);
 
-        console.log(params);
-
         this.output(ratio);
     };
 
