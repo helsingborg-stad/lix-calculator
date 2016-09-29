@@ -8,7 +8,7 @@ LixCalculator.Formula.Total = (function ($) {
     var totalPercent = 0;
 
     function Total() {
-        LixCalculator.addFormula(this, LixCalculatorLang.total.title, LixCalculatorLang.total.description);
+        LixCalculator.addFormula(this, LixCalculatorLang.total.title, LixCalculatorLang.total.description, 1000);
     }
 
     /**

@@ -99,17 +99,29 @@ var LixCalculator = (function ($) {
      * @param {string} title       Formula title
      * @param {string} description Formula description
      */
-    LixCalculator.prototype.addFormula = function (obj, title, description) {
-        $metaBox.append('\
-            <div class="col" id="lix-calculator-' + this.slugify(title) +'">\
+    LixCalculator.prototype.addFormula = function (obj, title, description, priority) {
+        if (typeof priority == 'undefined') {
+            priority = 10;
+        }
+
+        var markup = '<div class="col" id="lix-calculator-' + this.slugify(title) +'" data-priority="' + priority + '">\
                 <label>\
                     ' + title + '\
                     <small>' + description + '</small>\
                 </label>\
                 <em class="value">' + LixCalculatorLang.na + '</em><br>\
                 <span class="value">' + LixCalculatorLang.na + '</span>\
-            </div>\
-        ');
+            </div>';
+
+        var $col = $metaBox.find('.col').filter(function() {
+            return parseInt($(this).attr('data-priority')) <= priority;
+        }).last();
+
+        if ($col.length) {
+            $col.after(markup);
+        } else {
+            $metaBox.append(markup);
+        }
 
         formulas.push({
             obj: obj,
