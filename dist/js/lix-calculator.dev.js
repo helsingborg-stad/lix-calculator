@@ -53,13 +53,13 @@ var LixCalculator = (function ($) {
          */
         textContentEditor = $('textarea#content');
         textContentEditor.off('keyup');
-        this.calculate('text', this.trimContent(textContentEditor.val()), textContentEditor.val());
+        this.calculate('text', this.trimContent(textContentEditor.val()), wp.editor.autop(textContentEditor.val()));
 
         textContentEditor.on('keyup', function () {
             clearTimeout(typingTimer);
             typingTimer = setTimeout(function () {
 
-                this.calculate('text', this.trimContent(textContentEditor.val()), textContentEditor.val());
+                this.calculate('text', this.trimContent(textContentEditor.val()), wp.editor.autop(textContentEditor.val()));
 
             }.bind(this), typingTimerInterval);
         }.bind(this));
@@ -158,6 +158,10 @@ var LixCalculator = (function ($) {
         return (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0;
     };
 
+    LixCalculator.prototype.getParagraphs = function(text) {
+        return (text.trim().length > 0) ? text.trim().split(/[\r\n][\r\n]+/).length : 0;
+    };
+
     return new LixCalculator();
 
 })(jQuery);
@@ -177,7 +181,58 @@ LixCalculator.Formula.Headline = (function ($) {
      * @return {void}
      */
     Headline.prototype.init = function(content, raw) {
-        console.log(wp.editor.autop(raw));
+        this.calculate(raw);
+    };
+
+    Headline.prototype.calculate = function (raw) {
+        var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.headline.title);
+
+        var params = this.getParamsFromText(raw);
+        var ratio = params.paragraphs/params.headlines;
+
+        // Paragraphs per headline (ratio) divided by prefered paragraphs per headline (4)
+        var percent = ratio/4 * 100;
+        LixCalculator.Formula.Total.appendTotal(percent, 100);
+
+        var ratioBg = '#5DAE00';
+        var ratioText = '#fff';
+        var ratioRating = LixCalculatorLang.paragraph.good;
+
+        if (percent < 50) {
+            ratioBg = '#FF1300';
+            ratioText = '#fff';
+            ratioRating = LixCalculatorLang.paragraph.low;
+        }
+
+        if (percent >= 110) {
+            ratioBg = '#FF1300';
+            ratioText = '#fff';
+            ratioRating = LixCalculatorLang.paragraph.high;
+        }
+
+        percent = percent + '%';
+
+        $(target).find('em.value').html(percent).css({
+            'backgroundColor': ratioBg,
+            'color': ratioText
+        });
+
+        $(target).find('span.value').html(ratioRating).css({
+            'backgroundColor': ratioBg,
+            'color': ratioText
+        });
+    };
+
+    /**
+     * Parse text to get lix formula paramters
+     * @param  {string} text The content
+     * @return {object}      Lix parameters
+     */
+    Headline.prototype.getParamsFromText = function(raw) {
+        return {
+            headlines: raw.match(/<h(\d)>(.*)?<\/h(\d)>/ig).length + 1, // +1 since we have the post title as well
+            paragraphs: raw.match(/<p>/ig).length,
+        };
     };
 
     return new Headline();
@@ -398,7 +453,7 @@ LixCalculator.Formula.Paragraph = (function ($) {
     Paragraph.prototype.getParamsFromText = function(text) {
         return {
             sentences: LixCalculator.getSentences(text),
-            paragraphs: (text.trim().length > 0) ? text.trim().split(/[\r\n][\r\n]+/).length : 0,
+            paragraphs: LixCalculator.getParagraphs(text),
         };
     };
 

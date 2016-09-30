@@ -53,13 +53,13 @@ var LixCalculator = (function ($) {
          */
         textContentEditor = $('textarea#content');
         textContentEditor.off('keyup');
-        this.calculate('text', this.trimContent(textContentEditor.val()), textContentEditor.val());
+        this.calculate('text', this.trimContent(textContentEditor.val()), wp.editor.autop(textContentEditor.val()));
 
         textContentEditor.on('keyup', function () {
             clearTimeout(typingTimer);
             typingTimer = setTimeout(function () {
 
-                this.calculate('text', this.trimContent(textContentEditor.val()), textContentEditor.val());
+                this.calculate('text', this.trimContent(textContentEditor.val()), wp.editor.autop(textContentEditor.val()));
 
             }.bind(this), typingTimerInterval);
         }.bind(this));
@@ -156,6 +156,10 @@ var LixCalculator = (function ($) {
 
     LixCalculator.prototype.getSentences = function(text) {
         return (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0;
+    };
+
+    LixCalculator.prototype.getParagraphs = function(text) {
+        return (text.trim().length > 0) ? text.trim().split(/[\r\n][\r\n]+/).length : 0;
     };
 
     return new LixCalculator();

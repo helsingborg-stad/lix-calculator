@@ -29,7 +29,7 @@ class App
 
                 'paragraph' => array(
                     'title' => __('Paragrah ratio', 'lix-calculator'),
-                    'description' => __('sentences', 'lix-calculator') . '/' . __('paragraphs', 'lix-calculator'),
+                    'description' => __('Sentences', 'lix-calculator') . '/' . __('paragraphs', 'lix-calculator'),
                     'good' => __('Good', 'lix-calculator'),
                     'low' => __('Low', 'lix-calculator'),
                     'high' => __('High', 'lix-calculator')
@@ -37,7 +37,7 @@ class App
 
                 'headline' => array(
                     'title' => __('Headline ratio'),
-                    'description' => ''
+                    'description' => __('Paragrags', 'lix-calculator') . '/' . __('headline', 'lix-calculator')
                 ),
 
                 'total' => array(

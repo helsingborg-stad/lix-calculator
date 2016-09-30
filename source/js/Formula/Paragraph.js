@@ -90,7 +90,7 @@ LixCalculator.Formula.Paragraph = (function ($) {
     Paragraph.prototype.getParamsFromText = function(text) {
         return {
             sentences: LixCalculator.getSentences(text),
-            paragraphs: (text.trim().length > 0) ? text.trim().split(/[\r\n][\r\n]+/).length : 0,
+            paragraphs: LixCalculator.getParagraphs(text),
         };
     };
 
