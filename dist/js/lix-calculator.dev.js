@@ -148,6 +148,28 @@ var LixCalculator = (function ($) {
 
 })(jQuery);
 
+// LixCalculator = LixCalculator || {};
+// LixCalculator.Formula = LixCalculator.Formula || {};
+
+// LixCalculator.Formula.Headline = (function ($) {
+
+//     function Headline() {
+//         LixCalculator.addFormula(this, LixCalculatorLang.headline.title, LixCalculatorLang.headline.description);
+//     }
+
+//     /**
+//      * Initialize
+//      * @param  {string} content Text content to base calculations on
+//      * @return {void}
+//      */
+//     Headline.prototype.init = function(content) {
+
+//     };
+
+//     return new Headline();
+
+// })(jQuery);
+
 LixCalculator = LixCalculator || {};
 LixCalculator.Formula = LixCalculator.Formula || {};
 
@@ -320,8 +342,18 @@ LixCalculator.Formula.Paragraph = (function ($) {
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
-        LixCalculator.Formula.Total.appendTotal(ratio * 100, 100);
-        ratio = (ratio * 100).toFixed(2) + '%';
+        console.log(ratio);
+
+
+        ratio = (ratio * 100).toFixed(2);
+
+        if (ratio > 100 && ratio < 500) {
+            ratio = 100.00;
+        }
+
+        LixCalculator.Formula.Total.appendTotal(ratio, 100);
+
+        ratio = ratio + '%';
 
         $(target).find('em.value').html(ratio).css({
             'backgroundColor': ratioBg,
