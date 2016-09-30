@@ -43,6 +43,8 @@ LixCalculator.Formula.Paragraph = (function ($) {
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
+        ratio = ratio * 100;
+
         if (ratio > 100 && ratio < 500) {
             ratio = 100;
         }
@@ -72,7 +74,7 @@ LixCalculator.Formula.Paragraph = (function ($) {
         }
 
         var ratio = sentences/paragraphs;
-        ratio = ratio.toFixed(2);
+        ratio = ratio;
 
         return ratio;
     };
