@@ -106,7 +106,7 @@ var LixCalculator = (function ($) {
         }
 
         var outputted = false;
-        var markup = '<div class="col" id="lix-calculator-' + this.slugify(title) +'" data-priority="' + priority + '">\
+        var markup = '<div class="col" id="lix-calculator-' + this.slugify(obj.formulaId) +'" data-priority="' + priority + '">\
                 <label>\
                     ' + title + '\
                     <small>' + description + '</small>\
@@ -173,7 +173,10 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 
 LixCalculator.Formula.Headline = (function ($) {
 
+    var _formulaId = 'headline';
+
     function Headline() {
+        this.formulaId = _formulaId;
         LixCalculator.addFormula(this, LixCalculatorLang.headline.title, LixCalculatorLang.headline.description, 30);
     }
 
@@ -187,7 +190,7 @@ LixCalculator.Formula.Headline = (function ($) {
     };
 
     Headline.prototype.calculate = function (raw) {
-        var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.headline.title);
+        var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
 
         var params = this.getParamsFromText(raw);
         var ratio = params.paragraphs/params.headlines;
@@ -242,7 +245,10 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 
 LixCalculator.Formula.Lix = (function ($) {
 
+    var _formulaId = 'lix';
+
     function Lix() {
+        this.formulaId = _formulaId;
         LixCalculator.addFormula(this, LixCalculatorLang.lix.title, LixCalculatorLang.lix.description, 10);
     }
 
@@ -266,7 +272,7 @@ LixCalculator.Formula.Lix = (function ($) {
      * @return {void}
      */
     Lix.prototype.output = function(lix, readability) {
-        var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.lix.title);
+        var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
 
         LixCalculator.Formula.Total.appendTotal(100-lix, 100);
         lix = 100 - lix + '%';
@@ -353,9 +359,12 @@ LixCalculator.Formula.Lix = (function ($) {
 LixCalculator = LixCalculator || {};
 LixCalculator.Formula = LixCalculator.Formula || {};
 
-LixCalculator.Formula.Headline = (function ($) {
+LixCalculator.Formula.Moretag = (function ($) {
 
-    function Headline() {
+    var _formulaId = 'moretag';
+
+    function Moretag() {
+        this.formulaId = _formulaId;
         LixCalculator.addFormula(this, LixCalculatorLang.moretag.title, LixCalculatorLang.moretag.description, 50);
     }
 
@@ -364,8 +373,8 @@ LixCalculator.Formula.Headline = (function ($) {
      * @param  {string} content Text content to base calculations on
      * @return {void}
      */
-    Headline.prototype.init = function(content, raw) {
-        var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.moretag.title);
+    Moretag.prototype.init = function(content, raw) {
+        var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
         var hasMoretag = raw.match(/<!--more-->/g) ? raw.match(/<!--more-->/g).length : 0;
 
         var ratioText = '#5DAE00';
@@ -387,7 +396,7 @@ LixCalculator.Formula.Headline = (function ($) {
         });
     };
 
-    return new Headline();
+    return new Moretag();
 
 })(jQuery);
 
@@ -396,7 +405,10 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 
 LixCalculator.Formula.Paragraph = (function ($) {
 
+    var _formulaId = 'paragraph';
+
     function Paragraph() {
+        this.formulaId = _formulaId;
         LixCalculator.addFormula(this, LixCalculatorLang.paragraph.title, LixCalculatorLang.paragraph.description, 20);
     }
 
@@ -418,7 +430,7 @@ LixCalculator.Formula.Paragraph = (function ($) {
      * @return {void}
      */
     Paragraph.prototype.output = function(ratio) {
-        var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.paragraph.title);
+        var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
 
         if (ratio == 'NaN') {
             $(target).find('.value').html(LixCalculatorLang.na).attr('style', '');
@@ -491,11 +503,14 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 
 LixCalculator.Formula.Total = (function ($) {
 
+    var _formulaId = 'total';
+
     var totalCurrent = 0;
     var totalMax = 0;
     var totalPercent = 0;
 
     function Total() {
+        this.formulaId = _formulaId;
         LixCalculator.addFormula(this, LixCalculatorLang.total.title, LixCalculatorLang.total.description, 1000);
     }
 
@@ -519,7 +534,7 @@ LixCalculator.Formula.Total = (function ($) {
     };
 
     Total.prototype.output = function(percent) {
-        var target = '#lix-calculator-' + LixCalculator.slugify('Total');
+        var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
 
         var percentText = '#f2b127';
         var percentRating = LixCalculatorLang.total.ok;

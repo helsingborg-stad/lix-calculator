@@ -3,7 +3,10 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 
 LixCalculator.Formula.Lix = (function ($) {
 
+    var _formulaId = 'lix';
+
     function Lix() {
+        this.formulaId = _formulaId;
         LixCalculator.addFormula(this, LixCalculatorLang.lix.title, LixCalculatorLang.lix.description, 10);
     }
 
@@ -27,7 +30,7 @@ LixCalculator.Formula.Lix = (function ($) {
      * @return {void}
      */
     Lix.prototype.output = function(lix, readability) {
-        var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.lix.title);
+        var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
 
         LixCalculator.Formula.Total.appendTotal(100-lix, 100);
         lix = 100 - lix + '%';

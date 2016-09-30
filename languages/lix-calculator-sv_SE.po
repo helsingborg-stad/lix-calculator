@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lix Calculator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-01 09:59+0200\n"
-"PO-Revision-Date: 2016-07-01 10:00+0200\n"
+"POT-Creation-Date: 2016-09-30 09:58+0200\n"
+"PO-Revision-Date: 2016-09-30 09:59+0200\n"
 "Last-Translator: Beth <beth.linden@helsingborg.se>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -24,74 +24,123 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../dist/js/lix-calculator.min.js:1
-msgid "#content-tmce, #content-html"
+msgid "#content"
 msgstr ""
 
 #: ../dist/js/lix-calculator.min.js:1
-msgid "#content"
+msgid "#lix-calculator-content"
 msgstr ""
 
 #: ../dist/js/lix-calculator.min.js:1
 msgid "textarea#content"
 msgstr ""
 
-#: ../source/php/App.php:20
-msgid "Very hard"
-msgstr "Väldigt svår"
-
-#: ../source/php/App.php:21
-msgid "Hard"
-msgstr "Svår"
-
-#: ../source/php/App.php:22
-msgid "Moderate"
-msgstr "Medel"
-
-#: ../source/php/App.php:23
-msgid "Easy"
-msgstr "Lätt"
-
-#: ../source/php/App.php:24
-msgid "Very easy"
-msgstr "Väldigt lätt"
-
-#: ../source/php/App.php:25 ../templates/lix-metabox.php:5
-#: ../templates/lix-metabox.php:6 ../templates/lix-metabox.php:12
-#: ../templates/lix-metabox.php:13
-msgid "n/a"
-msgstr "n/a"
-
-#: ../source/php/App.php:26
-msgid "Good"
-msgstr "Bra"
-
-#: ../source/php/App.php:27
-msgid "Low"
-msgstr "Låg"
-
-#: ../source/php/App.php:28
-msgid "High"
-msgstr "Hög"
-
-#: ../source/php/App.php:43
+#: ../source/php/App.php:21 ../source/php/App.php:76
 msgid "Readability"
 msgstr "Läsbarhet"
 
-#: ../templates/lix-metabox.php:4
+#: ../source/php/App.php:22
 msgid "Lix value"
 msgstr "Lixvärde"
 
-#: ../templates/lix-metabox.php:11
+#: ../source/php/App.php:23
+msgid "Very hard"
+msgstr "Väldigt svår"
+
+#: ../source/php/App.php:24
+msgid "Hard"
+msgstr "Svår"
+
+#: ../source/php/App.php:25
+msgid "Moderate"
+msgstr "Medel"
+
+#: ../source/php/App.php:26
+msgid "Easy"
+msgstr "Lätt"
+
+#: ../source/php/App.php:27
+msgid "Very easy"
+msgstr "Väldigt lätt"
+
+#: ../source/php/App.php:31
 msgid "Paragrah ratio"
 msgstr "Styckeskvot"
 
-#: ../templates/lix-metabox.php:11
-msgid "sentences"
-msgstr "meningar"
+#: ../source/php/App.php:32
+msgid "Sentences"
+msgstr "Meningar"
 
-#: ../templates/lix-metabox.php:11
+#: ../source/php/App.php:32
 msgid "paragraphs"
 msgstr "stycken"
+
+#: ../source/php/App.php:33 ../source/php/App.php:55
+msgid "Good"
+msgstr "Bra"
+
+#: ../source/php/App.php:34
+msgid "Low"
+msgstr "Låg"
+
+#: ../source/php/App.php:35
+msgid "High"
+msgstr "Hög"
+
+#: ../source/php/App.php:39
+msgid "Headline ratio"
+msgstr "Rubrikkvot"
+
+#: ../source/php/App.php:40
+msgid "Paragraphs"
+msgstr "Stycken"
+
+#: ../source/php/App.php:40
+msgid "headline"
+msgstr "rubrik"
+
+#: ../source/php/App.php:44 ../source/php/App.php:47
+msgid "Has more-tag"
+msgstr "Har mer-tagg"
+
+#: ../source/php/App.php:45
+msgid "Yes or no"
+msgstr "Ja eller nej"
+
+#: ../source/php/App.php:46
+msgid "Missing more-tag"
+msgstr "Saknar mer-tagg"
+
+#: ../source/php/App.php:51
+msgid "Total"
+msgstr "Totalt"
+
+#: ../source/php/App.php:52
+msgid "Total score"
+msgstr "Total poäng"
+
+#: ../source/php/App.php:53
+msgid "Bad"
+msgstr "Dålig"
+
+#: ../source/php/App.php:54
+msgid "Ok"
+msgstr "Ok"
+
+#: ../source/php/App.php:58
+msgid "Yes"
+msgstr "Ja"
+
+#: ../source/php/App.php:59
+msgid "No"
+msgstr "Nej"
+
+#: ../source/php/App.php:60
+msgid "n/a"
+msgstr "n/a"
+
+#~ msgid "sentences"
+#~ msgstr "meningar"
 
 #~ msgid "Lix Calculator"
 #~ msgstr "Lixräknare"

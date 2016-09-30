@@ -3,7 +3,10 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 
 LixCalculator.Formula.Paragraph = (function ($) {
 
+    var _formulaId = 'paragraph';
+
     function Paragraph() {
+        this.formulaId = _formulaId;
         LixCalculator.addFormula(this, LixCalculatorLang.paragraph.title, LixCalculatorLang.paragraph.description, 20);
     }
 
@@ -25,7 +28,7 @@ LixCalculator.Formula.Paragraph = (function ($) {
      * @return {void}
      */
     Paragraph.prototype.output = function(ratio) {
-        var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.paragraph.title);
+        var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
 
         if (ratio == 'NaN') {
             $(target).find('.value').html(LixCalculatorLang.na).attr('style', '');

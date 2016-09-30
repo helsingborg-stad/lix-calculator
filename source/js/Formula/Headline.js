@@ -3,7 +3,10 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 
 LixCalculator.Formula.Headline = (function ($) {
 
+    var _formulaId = 'headline';
+
     function Headline() {
+        this.formulaId = _formulaId;
         LixCalculator.addFormula(this, LixCalculatorLang.headline.title, LixCalculatorLang.headline.description, 30);
     }
 
@@ -17,7 +20,7 @@ LixCalculator.Formula.Headline = (function ($) {
     };
 
     Headline.prototype.calculate = function (raw) {
-        var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.headline.title);
+        var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
 
         var params = this.getParamsFromText(raw);
         var ratio = params.paragraphs/params.headlines;

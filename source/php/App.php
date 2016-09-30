@@ -37,7 +37,7 @@ class App
 
                 'headline' => array(
                     'title' => __('Headline ratio'),
-                    'description' => __('Paragrags', 'lix-calculator') . '/' . __('headline', 'lix-calculator')
+                    'description' => __('Paragraphs', 'lix-calculator') . '/' . __('headline', 'lix-calculator')
                 ),
 
                 'moretag' => array(

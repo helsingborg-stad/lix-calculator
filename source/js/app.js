@@ -106,7 +106,7 @@ var LixCalculator = (function ($) {
         }
 
         var outputted = false;
-        var markup = '<div class="col" id="lix-calculator-' + this.slugify(title) +'" data-priority="' + priority + '">\
+        var markup = '<div class="col" id="lix-calculator-' + this.slugify(obj.formulaId) +'" data-priority="' + priority + '">\
                 <label>\
                     ' + title + '\
                     <small>' + description + '</small>\

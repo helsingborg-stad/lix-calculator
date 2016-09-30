@@ -1,9 +1,12 @@
 LixCalculator = LixCalculator || {};
 LixCalculator.Formula = LixCalculator.Formula || {};
 
-LixCalculator.Formula.Headline = (function ($) {
+LixCalculator.Formula.Moretag = (function ($) {
 
-    function Headline() {
+    var _formulaId = 'moretag';
+
+    function Moretag() {
+        this.formulaId = _formulaId;
         LixCalculator.addFormula(this, LixCalculatorLang.moretag.title, LixCalculatorLang.moretag.description, 50);
     }
 
@@ -12,8 +15,8 @@ LixCalculator.Formula.Headline = (function ($) {
      * @param  {string} content Text content to base calculations on
      * @return {void}
      */
-    Headline.prototype.init = function(content, raw) {
-        var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.moretag.title);
+    Moretag.prototype.init = function(content, raw) {
+        var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
         var hasMoretag = raw.match(/<!--more-->/g) ? raw.match(/<!--more-->/g).length : 0;
 
         var ratioText = '#5DAE00';
@@ -35,6 +38,6 @@ LixCalculator.Formula.Headline = (function ($) {
         });
     };
 
-    return new Headline();
+    return new Moretag();
 
 })(jQuery);
