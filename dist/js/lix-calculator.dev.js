@@ -34,13 +34,13 @@ var LixCalculator = (function ($) {
             if (tinymce.get('content')) {
                 visualContentEditor = tinymce.get('content');
                 visualContentEditor.off('keyup');
-                this.calculate('visual', this.trimContent(visualContentEditor.getContent({format: 'text'})));
+                this.calculate('visual', this.trimContent(visualContentEditor.getContent({format: 'text'})), visualContentEditor.getContent({format: 'html'}));
 
                 visualContentEditor.on('keyup', function () {
                     clearTimeout(typingTimer);
                     typingTimer = setTimeout(function () {
 
-                        this.calculate('visual', this.trimContent(visualContentEditor.getContent({format: 'text'})));
+                        this.calculate('visual', this.trimContent(visualContentEditor.getContent({format: 'text'})), visualContentEditor.getContent({format: 'html'}));
 
                     }.bind(this), typingTimerInterval);
                 }.bind(this));
@@ -53,13 +53,13 @@ var LixCalculator = (function ($) {
          */
         textContentEditor = $('textarea#content');
         textContentEditor.off('keyup');
-        this.calculate('text', this.trimContent(textContentEditor.val()));
+        this.calculate('text', this.trimContent(textContentEditor.val()), textContentEditor.val());
 
         textContentEditor.on('keyup', function () {
             clearTimeout(typingTimer);
             typingTimer = setTimeout(function () {
 
-                this.calculate('text', this.trimContent(textContentEditor.val()));
+                this.calculate('text', this.trimContent(textContentEditor.val()), textContentEditor.val());
 
             }.bind(this), typingTimerInterval);
         }.bind(this));
@@ -83,13 +83,13 @@ var LixCalculator = (function ($) {
      * @param  {string} content Editor content
      * @return {void}
      */
-    LixCalculator.prototype.calculate = function(type, content) {
+    LixCalculator.prototype.calculate = function(type, content, raw) {
         if (typeof LixCalculator.Formula != 'undefined') {
             LixCalculator.Formula.Total.resetTotal();
         }
 
         $.each(formulas, function (index, formula) {
-            formula.obj.init(content);
+            formula.obj.init(content, raw);
         }.bind(this));
     };
 
@@ -176,8 +176,8 @@ LixCalculator.Formula.Headline = (function ($) {
      * @param  {string} content Text content to base calculations on
      * @return {void}
      */
-    Headline.prototype.init = function(content) {
-
+    Headline.prototype.init = function(content, raw) {
+        console.log(wp.editor.autop(raw));
     };
 
     return new Headline();
