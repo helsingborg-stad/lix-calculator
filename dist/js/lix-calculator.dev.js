@@ -210,7 +210,7 @@ LixCalculator.Formula.Headline = (function ($) {
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
-        percent = percent + '%';
+        percent = percent.toFixed(2) + '%';
 
         $(target).find('em.value').html(percent).css({
             'backgroundColor': ratioBg,
@@ -414,12 +414,12 @@ LixCalculator.Formula.Paragraph = (function ($) {
         ratio = (ratio * 100).toFixed(2);
 
         if (ratio > 100 && ratio < 500) {
-            ratio = 100.00;
+            ratio = 100;
         }
 
         LixCalculator.Formula.Total.appendTotal(ratio, 100);
 
-        ratio = ratio + '%';
+        ratio = ratio.toFixed(2) + '%';
 
         $(target).find('em.value').html(ratio).css({
             'backgroundColor': ratioBg,

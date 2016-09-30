@@ -42,7 +42,7 @@ LixCalculator.Formula.Headline = (function ($) {
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
-        percent = percent + '%';
+        percent = percent.toFixed(2) + '%';
 
         $(target).find('em.value').html(percent).css({
             'backgroundColor': ratioBg,
