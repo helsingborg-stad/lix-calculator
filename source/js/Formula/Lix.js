@@ -85,7 +85,7 @@ LixCalculator.Formula.Lix = (function ($) {
      */
     Lix.prototype.calculate = function(words, longWords, sentences) {
         if (words === 0) {
-            return LixCalculatorLang.na;
+            return 100;
         }
 
         var lix = (words/sentences) + ((longWords/words) * 100);

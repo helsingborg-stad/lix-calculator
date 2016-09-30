@@ -231,8 +231,8 @@ LixCalculator.Formula.Headline = (function ($) {
      */
     Headline.prototype.getParamsFromText = function(raw) {
         return {
-            headlines: raw.match(/<h(\d)>(.*)?<\/h(\d)>/ig).length + 1, // +1 since we have the post title as well
-            paragraphs: raw.match(/<p>/ig).length,
+            headlines: raw.match(/<h(\d)>(.*)?<\/h(\d)>/ig) ? raw.match(/<h(\d)>(.*)?<\/h(\d)>/ig).length + 1 : 1, // +1 since we have the post title as well
+            paragraphs: raw.match(/<p>/ig) ? raw.match(/<p>/ig).length : 0,
         };
     };
 
@@ -327,7 +327,7 @@ LixCalculator.Formula.Lix = (function ($) {
      */
     Lix.prototype.calculate = function(words, longWords, sentences) {
         if (words === 0) {
-            return LixCalculatorLang.na;
+            return 100;
         }
 
         var lix = (words/sentences) + ((longWords/words) * 100);
@@ -432,11 +432,6 @@ LixCalculator.Formula.Paragraph = (function ($) {
     Paragraph.prototype.output = function(ratio) {
         var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
 
-        if (ratio == 'NaN') {
-            $(target).find('.value').html(LixCalculatorLang.na).attr('style', '');
-            return;
-        }
-
         var ratioText = '#5DAE00';
         var ratioRating = LixCalculatorLang.paragraph.good;
 
@@ -449,8 +444,6 @@ LixCalculator.Formula.Paragraph = (function ($) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
-
-        ratio = (ratio * 100).toFixed(2);
 
         if (ratio > 100 && ratio < 500) {
             ratio = 100;
@@ -476,6 +469,10 @@ LixCalculator.Formula.Paragraph = (function ($) {
      * @return {double}             Paragraph ratio
      */
     Paragraph.prototype.calculate = function(sentences, paragraphs) {
+        if (sentences == 0 && paragraphs == 0) {
+            return 0;
+        }
+
         var ratio = sentences/paragraphs;
         ratio = ratio.toFixed(2);
 

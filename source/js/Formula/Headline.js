@@ -61,8 +61,8 @@ LixCalculator.Formula.Headline = (function ($) {
      */
     Headline.prototype.getParamsFromText = function(raw) {
         return {
-            headlines: raw.match(/<h(\d)>(.*)?<\/h(\d)>/ig).length + 1, // +1 since we have the post title as well
-            paragraphs: raw.match(/<p>/ig).length,
+            headlines: raw.match(/<h(\d)>(.*)?<\/h(\d)>/ig) ? raw.match(/<h(\d)>(.*)?<\/h(\d)>/ig).length + 1 : 1, // +1 since we have the post title as well
+            paragraphs: raw.match(/<p>/ig) ? raw.match(/<p>/ig).length : 0,
         };
     };
 
