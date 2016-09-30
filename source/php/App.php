@@ -40,6 +40,13 @@ class App
                     'description' => __('Paragrags', 'lix-calculator') . '/' . __('headline', 'lix-calculator')
                 ),
 
+                'moretag' => array(
+                    'title' => __('Has more-tag', 'lix-calculator'),
+                    'description' => __('Yes or no', 'lix-calculator'),
+                    'missing' => __('Missing more-tag', 'lix-calculator'),
+                    'has' => __('Has more-tag', 'lix-calculator')
+                ),
+
                 'total' => array(
                     'title' => __('Total', 'lix-calculator'),
                     'description' => __('Total score', 'lix-calculator'),
@@ -48,6 +55,8 @@ class App
                     'good' => __('Good', 'lix-calculator')
                 ),
 
+                'yes' => __('Yes'),
+                'no' => __('No'),
                 'na' => __('n/a', 'lix-calculator')
             ));
 

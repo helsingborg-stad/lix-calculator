@@ -32,19 +32,16 @@ LixCalculator.Formula.Paragraph = (function ($) {
             return;
         }
 
-        var ratioBg = '#5DAE00';
-        var ratioText = '#fff';
+        var ratioText = '#5DAE00';
         var ratioRating = LixCalculatorLang.paragraph.good;
 
         if (ratio < 1) {
-            ratioBg = '#FF1300';
-            ratioText = '#fff';
+            ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.low;
         }
 
         if (ratio >= 5) {
-            ratioBg = '#FF1300';
-            ratioText = '#fff';
+            ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
@@ -59,12 +56,10 @@ LixCalculator.Formula.Paragraph = (function ($) {
         ratio = ratio.toFixed(2) + '%';
 
         $(target).find('em.value').html(ratio).css({
-            'backgroundColor': ratioBg,
             'color': ratioText
         });
 
         $(target).find('span.value').html(ratioRating).css({
-            'backgroundColor': ratioBg,
             'color': ratioText
         });
     };

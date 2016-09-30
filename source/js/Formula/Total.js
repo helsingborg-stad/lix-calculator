@@ -33,31 +33,26 @@ LixCalculator.Formula.Total = (function ($) {
     Total.prototype.output = function(percent) {
         var target = '#lix-calculator-' + LixCalculator.slugify('Total');
 
-        var percentBg = '#f2b127';
-        var percentText = '#fff';
+        var percentText = '#f2b127';
         var percentRating = LixCalculatorLang.total.ok;
 
         if (percent < 40) {
-            percentBg = '#FF1300';
-            percentText = '#fff';
+            percentText = '#FF1300';
             percentRating = LixCalculatorLang.total.bad;
         }
 
         if (percent >= 60) {
-            percentBg = '#5DAE00';
-            percentText = '#fff';
+            percentText = '#5DAE00';
             percentRating = LixCalculatorLang.total.good;
         }
 
         percent = percent + '%';
 
         $(target).find('em.value').html(percent).css({
-            'backgroundColor': percentBg,
             'color': percentText
         });
 
         $(target).find('span.value').html(percentRating).css({
-            'backgroundColor': percentBg,
             'color': percentText
         });
     };

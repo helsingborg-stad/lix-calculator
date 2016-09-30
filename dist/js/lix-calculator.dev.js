@@ -111,8 +111,10 @@ var LixCalculator = (function ($) {
                     ' + title + '\
                     <small>' + description + '</small>\
                 </label>\
-                <em class="value">' + LixCalculatorLang.na + '</em><br>\
-                <span class="value">' + LixCalculatorLang.na + '</span>\
+                <div class="values">\
+                    <em class="value">' + LixCalculatorLang.na + '</em>\
+                    <span class="value">' + LixCalculatorLang.na + '</span>\
+                </div>\
             </div>';
 
         var $col = $metaBox.find('.col').filter(function() {
@@ -155,11 +157,11 @@ var LixCalculator = (function ($) {
     };
 
     LixCalculator.prototype.getSentences = function(text) {
-        return (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0;
+        return (text.trim().length > 0 && text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g)) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0;
     };
 
     LixCalculator.prototype.getParagraphs = function(text) {
-        return (text.trim().length > 0) ? text.trim().split(/[\r\n][\r\n]+/).length : 0;
+        return (text.trim().length > 0 && text.trim().split(/[\r\n][\r\n]+/)) ? text.trim().split(/[\r\n][\r\n]+/).length : 0;
     };
 
     return new LixCalculator();
@@ -195,30 +197,26 @@ LixCalculator.Formula.Headline = (function ($) {
         LixCalculator.Formula.Total.appendTotal(percent, 100);
 
         var ratioBg = '#5DAE00';
-        var ratioText = '#fff';
+        var ratioText = '#5DAE00';
         var ratioRating = LixCalculatorLang.paragraph.good;
 
         if (percent < 50) {
-            ratioBg = '#FF1300';
-            ratioText = '#fff';
+            ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.low;
         }
 
         if (percent >= 110) {
-            ratioBg = '#FF1300';
-            ratioText = '#fff';
+            ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
         percent = percent.toFixed(2) + '%';
 
         $(target).find('em.value').html(percent).css({
-            'backgroundColor': ratioBg,
             'color': ratioText
         });
 
         $(target).find('span.value').html(ratioRating).css({
-            'backgroundColor': ratioBg,
             'color': ratioText
         });
     };
@@ -274,12 +272,10 @@ LixCalculator.Formula.Lix = (function ($) {
         lix = 100 - lix + '%';
 
         $(target).find('em.value').html(lix).css({
-            'backgroundColor': readability.bgColor,
             'color': readability.textColor
         });
 
         $(target).find('span.value').html(readability.value).css({
-            'backgroundColor': readability.bgColor,
             'color': readability.textColor
         });
     };
@@ -291,34 +287,27 @@ LixCalculator.Formula.Lix = (function ($) {
      */
     Lix.prototype.getReadability = function(lix) {
         var value = LixCalculatorLang.na;
-        var bgColor = '#ddd';
-        var textColor = '#000';
+        var textColor = '#ddd';
 
         if (lix < 30) {
             value = LixCalculatorLang.lix.very_easy;
-            bgColor = '#098400';
-            textColor = '#fff';
+            textColor = '#098400';
         } else if (lix > 29 && lix < 41) {
             value = LixCalculatorLang.lix.easy;
-            bgColor = '#5DAE00';
-            textColor = '#fff';
+            textColor = '#5DAE00';
         } else if (lix > 40 && lix < 51) {
             value = LixCalculatorLang.lix.moderate;
-            bgColor = '#FFDC00';
-            textColor = '#000';
+            textColor = '#FFDC00';
         } else if (lix > 50 && lix < 61) {
             value = LixCalculatorLang.lix.hard;
-            bgColor = '#FF9600';
-            textColor = '#000';
+            textColor = '#FF9600';
         } else if (lix > 60) {
             value = LixCalculatorLang.lix.very_hard;
-            bgColor = '#FF1300';
-            textColor = '#fff';
+            textColor = '#FF1300';
         }
 
         return {
             'value': value,
-            'bgColor': bgColor,
             'textColor': textColor
         };
     };
@@ -364,6 +353,47 @@ LixCalculator.Formula.Lix = (function ($) {
 LixCalculator = LixCalculator || {};
 LixCalculator.Formula = LixCalculator.Formula || {};
 
+LixCalculator.Formula.Headline = (function ($) {
+
+    function Headline() {
+        LixCalculator.addFormula(this, LixCalculatorLang.moretag.title, LixCalculatorLang.moretag.description, 50);
+    }
+
+    /**
+     * Initialize
+     * @param  {string} content Text content to base calculations on
+     * @return {void}
+     */
+    Headline.prototype.init = function(content, raw) {
+        var target = '#lix-calculator-' + LixCalculator.slugify(LixCalculatorLang.moretag.title);
+        var hasMoretag = raw.match(/<!--more-->/g) ? raw.match(/<!--more-->/g).length : 0;
+
+        var ratioText = '#5DAE00';
+        var ratio = LixCalculatorLang.yes;
+        var ratioRating = LixCalculatorLang.moretag.has;
+
+        if (!hasMoretag) {
+            ratioText = '#FF1300';
+            ratio = LixCalculatorLang.no;
+            ratioRating = LixCalculatorLang.moretag.missing;
+        }
+
+        $(target).find('em.value').html(ratio).css({
+            'color': ratioText
+        });
+
+        $(target).find('span.value').html(ratioRating).css({
+            'color': ratioText
+        });
+    };
+
+    return new Headline();
+
+})(jQuery);
+
+LixCalculator = LixCalculator || {};
+LixCalculator.Formula = LixCalculator.Formula || {};
+
 LixCalculator.Formula.Paragraph = (function ($) {
 
     function Paragraph() {
@@ -395,19 +425,16 @@ LixCalculator.Formula.Paragraph = (function ($) {
             return;
         }
 
-        var ratioBg = '#5DAE00';
-        var ratioText = '#fff';
+        var ratioText = '#5DAE00';
         var ratioRating = LixCalculatorLang.paragraph.good;
 
         if (ratio < 1) {
-            ratioBg = '#FF1300';
-            ratioText = '#fff';
+            ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.low;
         }
 
         if (ratio >= 5) {
-            ratioBg = '#FF1300';
-            ratioText = '#fff';
+            ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
@@ -422,12 +449,10 @@ LixCalculator.Formula.Paragraph = (function ($) {
         ratio = ratio.toFixed(2) + '%';
 
         $(target).find('em.value').html(ratio).css({
-            'backgroundColor': ratioBg,
             'color': ratioText
         });
 
         $(target).find('span.value').html(ratioRating).css({
-            'backgroundColor': ratioBg,
             'color': ratioText
         });
     };
@@ -496,31 +521,26 @@ LixCalculator.Formula.Total = (function ($) {
     Total.prototype.output = function(percent) {
         var target = '#lix-calculator-' + LixCalculator.slugify('Total');
 
-        var percentBg = '#f2b127';
-        var percentText = '#fff';
+        var percentText = '#f2b127';
         var percentRating = LixCalculatorLang.total.ok;
 
         if (percent < 40) {
-            percentBg = '#FF1300';
-            percentText = '#fff';
+            percentText = '#FF1300';
             percentRating = LixCalculatorLang.total.bad;
         }
 
         if (percent >= 60) {
-            percentBg = '#5DAE00';
-            percentText = '#fff';
+            percentText = '#5DAE00';
             percentRating = LixCalculatorLang.total.good;
         }
 
         percent = percent + '%';
 
         $(target).find('em.value').html(percent).css({
-            'backgroundColor': percentBg,
             'color': percentText
         });
 
         $(target).find('span.value').html(percentRating).css({
-            'backgroundColor': percentBg,
             'color': percentText
         });
     };

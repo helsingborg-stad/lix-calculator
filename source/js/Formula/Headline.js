@@ -27,30 +27,26 @@ LixCalculator.Formula.Headline = (function ($) {
         LixCalculator.Formula.Total.appendTotal(percent, 100);
 
         var ratioBg = '#5DAE00';
-        var ratioText = '#fff';
+        var ratioText = '#5DAE00';
         var ratioRating = LixCalculatorLang.paragraph.good;
 
         if (percent < 50) {
-            ratioBg = '#FF1300';
-            ratioText = '#fff';
+            ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.low;
         }
 
         if (percent >= 110) {
-            ratioBg = '#FF1300';
-            ratioText = '#fff';
+            ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
         percent = percent.toFixed(2) + '%';
 
         $(target).find('em.value').html(percent).css({
-            'backgroundColor': ratioBg,
             'color': ratioText
         });
 
         $(target).find('span.value').html(ratioRating).css({
-            'backgroundColor': ratioBg,
             'color': ratioText
         });
     };

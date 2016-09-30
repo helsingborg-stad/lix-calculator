@@ -33,12 +33,10 @@ LixCalculator.Formula.Lix = (function ($) {
         lix = 100 - lix + '%';
 
         $(target).find('em.value').html(lix).css({
-            'backgroundColor': readability.bgColor,
             'color': readability.textColor
         });
 
         $(target).find('span.value').html(readability.value).css({
-            'backgroundColor': readability.bgColor,
             'color': readability.textColor
         });
     };
@@ -50,34 +48,27 @@ LixCalculator.Formula.Lix = (function ($) {
      */
     Lix.prototype.getReadability = function(lix) {
         var value = LixCalculatorLang.na;
-        var bgColor = '#ddd';
-        var textColor = '#000';
+        var textColor = '#ddd';
 
         if (lix < 30) {
             value = LixCalculatorLang.lix.very_easy;
-            bgColor = '#098400';
-            textColor = '#fff';
+            textColor = '#098400';
         } else if (lix > 29 && lix < 41) {
             value = LixCalculatorLang.lix.easy;
-            bgColor = '#5DAE00';
-            textColor = '#fff';
+            textColor = '#5DAE00';
         } else if (lix > 40 && lix < 51) {
             value = LixCalculatorLang.lix.moderate;
-            bgColor = '#FFDC00';
-            textColor = '#000';
+            textColor = '#FFDC00';
         } else if (lix > 50 && lix < 61) {
             value = LixCalculatorLang.lix.hard;
-            bgColor = '#FF9600';
-            textColor = '#000';
+            textColor = '#FF9600';
         } else if (lix > 60) {
             value = LixCalculatorLang.lix.very_hard;
-            bgColor = '#FF1300';
-            textColor = '#fff';
+            textColor = '#FF1300';
         }
 
         return {
             'value': value,
-            'bgColor': bgColor,
             'textColor': textColor
         };
     };

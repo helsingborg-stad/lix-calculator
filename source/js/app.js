@@ -111,8 +111,10 @@ var LixCalculator = (function ($) {
                     ' + title + '\
                     <small>' + description + '</small>\
                 </label>\
-                <em class="value">' + LixCalculatorLang.na + '</em><br>\
-                <span class="value">' + LixCalculatorLang.na + '</span>\
+                <div class="values">\
+                    <em class="value">' + LixCalculatorLang.na + '</em>\
+                    <span class="value">' + LixCalculatorLang.na + '</span>\
+                </div>\
             </div>';
 
         var $col = $metaBox.find('.col').filter(function() {
@@ -155,11 +157,11 @@ var LixCalculator = (function ($) {
     };
 
     LixCalculator.prototype.getSentences = function(text) {
-        return (text.trim().length > 0) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0;
+        return (text.trim().length > 0 && text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g)) ? text.trim().match(/([^\.\!\?]+[\.\?\!]*)/g).length : 0;
     };
 
     LixCalculator.prototype.getParagraphs = function(text) {
-        return (text.trim().length > 0) ? text.trim().split(/[\r\n][\r\n]+/).length : 0;
+        return (text.trim().length > 0 && text.trim().split(/[\r\n][\r\n]+/)) ? text.trim().split(/[\r\n][\r\n]+/).length : 0;
     };
 
     return new LixCalculator();

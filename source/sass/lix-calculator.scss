@@ -1,11 +1,22 @@
+#lix-calculator {
+    .inside {
+        margin: 0;
+        padding: 0;
+    }
+}
+
 #lix-calculator-content {
-
-    padding: 15px;
-
     .col {
         display: inline-block;
         vertical-align: top;
         min-width: 150px;
+        padding: 15px;
+
+        &::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
     }
 
     .col + .col {
@@ -14,9 +25,9 @@
 
     label {
         display: block;
-        text-transform: uppercase;
         cursor: default;
         font-weight: bold;
+        float: left;
 
         small {
             display: block;
@@ -27,29 +38,32 @@
         }
     }
 
-    em.value {
-        display: inline-block;
-        margin-top: 5px;
-        padding: 10px;
-
-        font-size: 3em;
-        line-height: 1;
-        font-style: normal;
-        font-weight: 900;
+    .values {
+        float: right;
     }
 
-    em.value{
-        background-color: #ddd;
+    em.value {
+        display: block;
         transition: all 300ms;
+        font-style: normal;
+        font-weight: 900;
+        color: #ddd;
+        text-align: right;
     }
 
     span.value,
     .value {
-        display: inline-block;
-        padding: 0 10px 5px;
-        background-color: #ddd;
+        display: block;
+        font-size: .9em;
         transition: all 300ms;
+        text-align: right;
     }
+}
+
+#lix-calculator-total {
+    background-color: #f9f9f9;
+    font-size: 1.2em;
+    line-height: 1.5;
 }
 
 #side-sortables #lix-calculator-content {
@@ -58,7 +72,6 @@
     }
 
     .col + .col {
-        padding-left: 0;
-        padding-top: 15px;
+        border-top: 1px solid #E5E5E5;
     }
 }
