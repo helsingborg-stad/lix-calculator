@@ -35,6 +35,11 @@ class App
                     'high' => __('High', 'lix-calculator')
                 ),
 
+                'headline' => array(
+                    'title' => __('Headline ratio'),
+                    'description' => ''
+                ),
+
                 'total' => array(
                     'title' => __('Total', 'lix-calculator'),
                     'description' => __('Total score', 'lix-calculator'),

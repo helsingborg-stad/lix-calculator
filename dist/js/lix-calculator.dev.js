@@ -105,6 +105,7 @@ var LixCalculator = (function ($) {
             priority = 10;
         }
 
+        var outputted = false;
         var markup = '<div class="col" id="lix-calculator-' + this.slugify(title) +'" data-priority="' + priority + '">\
                 <label>\
                     ' + title + '\
@@ -118,9 +119,22 @@ var LixCalculator = (function ($) {
             return parseInt($(this).attr('data-priority')) <= priority;
         }).last();
 
-        if ($col.length) {
+        if (!$col.length) {
+            $col = $metaBox.find('.col').filter(function() {
+                return parseInt($(this).attr('data-priority')) > priority;
+            }).first();
+
+            if ($col.length) {
+                $col.before(markup);
+                outputted = true;
+            }
+
+            $col = {};
+        }
+
+        if (!outputted && $col.length) {
             $col.after(markup);
-        } else {
+        } else if (!outputted) {
             $metaBox.append(markup);
         }
 
@@ -148,27 +162,27 @@ var LixCalculator = (function ($) {
 
 })(jQuery);
 
-// LixCalculator = LixCalculator || {};
-// LixCalculator.Formula = LixCalculator.Formula || {};
+LixCalculator = LixCalculator || {};
+LixCalculator.Formula = LixCalculator.Formula || {};
 
-// LixCalculator.Formula.Headline = (function ($) {
+LixCalculator.Formula.Headline = (function ($) {
 
-//     function Headline() {
-//         LixCalculator.addFormula(this, LixCalculatorLang.headline.title, LixCalculatorLang.headline.description);
-//     }
+    function Headline() {
+        LixCalculator.addFormula(this, LixCalculatorLang.headline.title, LixCalculatorLang.headline.description, 30);
+    }
 
-//     /**
-//      * Initialize
-//      * @param  {string} content Text content to base calculations on
-//      * @return {void}
-//      */
-//     Headline.prototype.init = function(content) {
+    /**
+     * Initialize
+     * @param  {string} content Text content to base calculations on
+     * @return {void}
+     */
+    Headline.prototype.init = function(content) {
 
-//     };
+    };
 
-//     return new Headline();
+    return new Headline();
 
-// })(jQuery);
+})(jQuery);
 
 LixCalculator = LixCalculator || {};
 LixCalculator.Formula = LixCalculator.Formula || {};

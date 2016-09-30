@@ -105,6 +105,7 @@ var LixCalculator = (function ($) {
             priority = 10;
         }
 
+        var outputted = false;
         var markup = '<div class="col" id="lix-calculator-' + this.slugify(title) +'" data-priority="' + priority + '">\
                 <label>\
                     ' + title + '\
@@ -118,9 +119,22 @@ var LixCalculator = (function ($) {
             return parseInt($(this).attr('data-priority')) <= priority;
         }).last();
 
-        if ($col.length) {
+        if (!$col.length) {
+            $col = $metaBox.find('.col').filter(function() {
+                return parseInt($(this).attr('data-priority')) > priority;
+            }).first();
+
+            if ($col.length) {
+                $col.before(markup);
+                outputted = true;
+            }
+
+            $col = {};
+        }
+
+        if (!outputted && $col.length) {
             $col.after(markup);
-        } else {
+        } else if (!outputted) {
             $metaBox.append(markup);
         }
 
