@@ -4,7 +4,7 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 LixCalculator.Formula.Lix = (function ($) {
 
     function Lix() {
-        LixCalculator.addFormula(this, LixCalculatorLang.lix.title, LixCalculatorLang.lix.description);
+        LixCalculator.addFormula(this, LixCalculatorLang.lix.title, LixCalculatorLang.lix.description, 10);
     }
 
     /**

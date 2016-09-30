@@ -4,7 +4,7 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 LixCalculator.Formula.Paragraph = (function ($) {
 
     function Paragraph() {
-        LixCalculator.addFormula(this, LixCalculatorLang.paragraph.title, LixCalculatorLang.paragraph.description);
+        LixCalculator.addFormula(this, LixCalculatorLang.paragraph.title, LixCalculatorLang.paragraph.description, 20);
     }
 
     /**
@@ -47,9 +47,6 @@ LixCalculator.Formula.Paragraph = (function ($) {
             ratioText = '#fff';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
-
-        console.log(ratio);
-
 
         ratio = (ratio * 100).toFixed(2);
 

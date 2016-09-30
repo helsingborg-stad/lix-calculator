@@ -190,7 +190,7 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 LixCalculator.Formula.Lix = (function ($) {
 
     function Lix() {
-        LixCalculator.addFormula(this, LixCalculatorLang.lix.title, LixCalculatorLang.lix.description);
+        LixCalculator.addFormula(this, LixCalculatorLang.lix.title, LixCalculatorLang.lix.description, 10);
     }
 
     /**
@@ -312,7 +312,7 @@ LixCalculator.Formula = LixCalculator.Formula || {};
 LixCalculator.Formula.Paragraph = (function ($) {
 
     function Paragraph() {
-        LixCalculator.addFormula(this, LixCalculatorLang.paragraph.title, LixCalculatorLang.paragraph.description);
+        LixCalculator.addFormula(this, LixCalculatorLang.paragraph.title, LixCalculatorLang.paragraph.description, 20);
     }
 
     /**
@@ -355,9 +355,6 @@ LixCalculator.Formula.Paragraph = (function ($) {
             ratioText = '#fff';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
-
-        console.log(ratio);
-
 
         ratio = (ratio * 100).toFixed(2);
 
