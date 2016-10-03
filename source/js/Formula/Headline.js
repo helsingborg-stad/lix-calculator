@@ -33,12 +33,17 @@ LixCalculator.Formula.Headline = (function ($) {
         var ratioText = '#5DAE00';
         var ratioRating = LixCalculatorLang.paragraph.good;
 
-        if (percent < 50) {
+        if (percent < 25) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.low;
         }
 
-        if (percent >= 110) {
+        if (percent >= 25 && percent < 75) {
+            ratioText = '#FFDC00';
+            ratioRating = LixCalculatorLang.total.ok;
+        }
+
+        if (percent >= 125) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.high;
         }

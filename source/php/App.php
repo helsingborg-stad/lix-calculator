@@ -36,7 +36,7 @@ class App
                 ),
 
                 'headline' => array(
-                    'title' => __('Headline ratio'),
+                    'title' => __('Headline ratio', 'lix-calculator'),
                     'description' => __('Paragraphs', 'lix-calculator') . '/' . __('headline', 'lix-calculator')
                 ),
 
