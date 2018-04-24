@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lix Calculator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 09:58+0200\n"
-"PO-Revision-Date: 2016-09-30 09:59+0200\n"
+"POT-Creation-Date: 2018-04-24 16:58+0200\n"
+"PO-Revision-Date: 2018-04-24 16:58+0200\n"
 "Last-Translator: Beth <beth.linden@helsingborg.se>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -20,7 +20,7 @@ msgstr ""
 "esc_attr_x:1,2c;esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;"
 "transChoice:1,2\n"
 "X-Loco-Target-Locale: sv_SE\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../dist/js/lix-calculator.min.js:1
@@ -33,6 +33,198 @@ msgstr ""
 
 #: ../dist/js/lix-calculator.min.js:1
 msgid "textarea#content"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "tabWidth"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "useTabs"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "reuseWhitespace"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "lineTerminator"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "wrapColumn"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "sourceFileName"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "sourceMapName"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "sourceRoot"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "inputSourceMap"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "esprima"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "parser"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "range"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "tolerant"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "quote"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "trailingComma"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "arrayBracketSpacing"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "objectCurlySpacing"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "arrowParensAlways"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "flowObjectCommas"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "next"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "throw"
+msgstr ""
+
+#: ../node_modules/ajv/dist/regenerator.min.js:2
+msgid "end"
+msgstr ""
+
+#: ../node_modules/node-sass/node_modules/lodash/lodash.min.js:53
+#: ../node_modules/sass-graph/node_modules/lodash/lodash.min.js:53
+msgid "e"
+msgstr ""
+
+#: ../node_modules/yargs-parser/index.js:301
+#, javascript-format
+msgid "Not enough arguments following: %s"
+msgstr ""
+
+#: ../node_modules/yargs-parser/index.js:449
+#, javascript-format
+msgid "Invalid JSON config file: %s"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:169
+msgid "Commands:"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:177
+#: ../node_modules/yargs/lib/usage.js:407
+msgid "default:"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:179
+msgid "aliases:"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:241
+msgid "boolean"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:242
+msgid "count"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:243
+#: ../node_modules/yargs/lib/usage.js:244
+msgid "string"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:245
+msgid "array"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:246
+msgid "number"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:250
+msgid "required"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:251
+msgid "choices:"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:270
+msgid "Examples:"
+msgstr ""
+
+#: ../node_modules/yargs/lib/usage.js:385
+msgid "generated-value"
+msgstr ""
+
+#: ../node_modules/yargs/lib/validation.js:26
+#: ../node_modules/yargs/lib/validation.js:49
+#, javascript-format
+msgid "Not enough non-option arguments: got %s, need at least %s"
+msgstr ""
+
+#: ../node_modules/yargs/lib/validation.js:37
+#, javascript-format
+msgid "Too many non-option arguments: got %s, maximum of %s"
+msgstr ""
+
+#: ../node_modules/yargs/lib/validation.js:185
+msgid "Invalid values:"
+msgstr ""
+
+#: ../node_modules/yargs/lib/validation.js:188
+#, javascript-format
+msgid "Argument: %s, Given: %s, Choices: %s"
+msgstr ""
+
+#: ../node_modules/yargs/lib/validation.js:218
+#, javascript-format
+msgid "Argument check failed: %s"
+msgstr ""
+
+#: ../node_modules/yargs/lib/validation.js:283
+msgid "Implications failed:"
+msgstr ""
+
+#: ../node_modules/yargs/lib/validation.js:313
+#, javascript-format
+msgid "Arguments %s and %s are mutually exclusive"
+msgstr ""
+
+#: ../node_modules/yargs/lib/validation.js:332
+#, javascript-format
+msgid "Did you mean %s?"
 msgstr ""
 
 #: ../source/php/App.php:21 ../source/php/App.php:76
@@ -68,12 +260,8 @@ msgid "Paragrah ratio"
 msgstr "Styckeskvot"
 
 #: ../source/php/App.php:32
-msgid "Sentences"
-msgstr "Meningar"
-
-#: ../source/php/App.php:32
-msgid "paragraphs"
-msgstr "stycken"
+msgid "Sentences per paragraph"
+msgstr "Meningar per stycke"
 
 #: ../source/php/App.php:33 ../source/php/App.php:55
 msgid "Good"
@@ -92,12 +280,8 @@ msgid "Headline ratio"
 msgstr "Rubrikkvot"
 
 #: ../source/php/App.php:40
-msgid "Paragraphs"
-msgstr "Stycken"
-
-#: ../source/php/App.php:40
-msgid "headline"
-msgstr "rubrik"
+msgid "Paragraphs per headline"
+msgstr "Stycken per rubrik"
 
 #: ../source/php/App.php:44 ../source/php/App.php:47
 msgid "Has more-tag"
@@ -138,6 +322,21 @@ msgstr "Nej"
 #: ../source/php/App.php:60
 msgid "n/a"
 msgstr "n/a"
+
+#~ msgid "Sentences"
+#~ msgstr "Meningar"
+
+#~ msgid "per"
+#~ msgstr "per"
+
+#~ msgid "paragraphs"
+#~ msgstr "stycken"
+
+#~ msgid "Paragraphs"
+#~ msgstr "Stycken"
+
+#~ msgid "headline"
+#~ msgstr "rubrik"
 
 #~ msgid "sentences"
 #~ msgstr "meningar"
