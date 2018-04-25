@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lix Calculator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-24 16:58+0200\n"
-"PO-Revision-Date: 2018-04-24 16:58+0200\n"
+"POT-Creation-Date: 2018-04-25 08:51+0200\n"
+"PO-Revision-Date: 2018-04-25 08:54+0200\n"
 "Last-Translator: Beth <beth.linden@helsingborg.se>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -232,8 +232,8 @@ msgid "Readability"
 msgstr "Läsbarhet"
 
 #: ../source/php/App.php:22
-msgid "Lix value"
-msgstr "Lixvärde"
+msgid "Lix value (lower is better)"
+msgstr "Lixvärde (lägre är bättre)"
 
 #: ../source/php/App.php:23
 msgid "Very hard"
@@ -322,6 +322,9 @@ msgstr "Nej"
 #: ../source/php/App.php:60
 msgid "n/a"
 msgstr "n/a"
+
+#~ msgid "Lix value"
+#~ msgstr "Lixvärde"
 
 #~ msgid "Sentences"
 #~ msgstr "Meningar"

@@ -19,7 +19,7 @@ class App
             wp_localize_script('lix-calculator', 'LixCalculatorLang', array(
                 'lix' => array(
                     'title' => __('Readability', 'lix-calculator'),
-                    'description' => __('Lix value', 'lix-calculator'),
+                    'description' => __('Lix value (lower is better)', 'lix-calculator'),
                     'very_hard' => __('Very hard', 'lix-calculator'),
                     'hard' => __('Hard', 'lix-calculator'),
                     'moderate' => __('Moderate', 'lix-calculator'),
