@@ -25,36 +25,31 @@ LixCalculator.Formula.Headline = (function ($) {
         var params = this.getParamsFromText(raw);
         var ratio = params.paragraphs/params.headlines;
 
-        // Paragraphs per headline (ratio) divided by prefered paragraphs per headline (4)
-        var percent = ratio/4 * 100;
-        LixCalculator.Formula.Total.appendTotal(percent, 100);
+        ratio = ratio.toFixed(0);
 
-        var ratioBg = '#5DAE00';
         var ratioText = '#5DAE00';
         var ratioRating = LixCalculatorLang.paragraph.good;
 
-        if (percent < 25) {
+        if (ratio < 1) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.low;
         }
 
-        if (percent >= 25 && percent < 75) {
-            ratioText = '#FFDC00';
+        if (ratio == 5) {
+            ratioText = '#FFB700';
             ratioRating = LixCalculatorLang.total.ok;
         }
 
-        if (percent >= 125) {
+        if (ratio >= 6) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
-        percent = percent.toFixed(2) + '%';
-
-        $(target).find('em.value').html(percent).css({
+        $(target).find('span.value').html(ratio).css({
             'color': ratioText
         });
 
-        $(target).find('span.value').html(ratioRating).css({
+        $(target).find('em.value').html(ratioRating).css({
             'color': ratioText
         });
     };

@@ -84,8 +84,6 @@ var LixCalculator = (function ($) {
      * @return {void}
      */
     LixCalculator.prototype.calculate = function(type, content, raw) {
-        this.Formula.Total.resetTotal();
-
         $.each(formulas, function (index, formula) {
             formula.obj.init(content, raw);
         }.bind(this));
@@ -193,36 +191,31 @@ LixCalculator.Formula.Headline = (function ($) {
         var params = this.getParamsFromText(raw);
         var ratio = params.paragraphs/params.headlines;
 
-        // Paragraphs per headline (ratio) divided by prefered paragraphs per headline (4)
-        var percent = ratio/4 * 100;
-        LixCalculator.Formula.Total.appendTotal(percent, 100);
+        ratio = ratio.toFixed(0);
 
-        var ratioBg = '#5DAE00';
         var ratioText = '#5DAE00';
         var ratioRating = LixCalculatorLang.paragraph.good;
 
-        if (percent < 25) {
+        if (ratio < 1) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.low;
         }
 
-        if (percent >= 25 && percent < 75) {
-            ratioText = '#FFDC00';
+        if (ratio == 5) {
+            ratioText = '#FFB700';
             ratioRating = LixCalculatorLang.total.ok;
         }
 
-        if (percent >= 125) {
+        if (ratio >= 6) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
-        percent = percent.toFixed(2) + '%';
-
-        $(target).find('em.value').html(percent).css({
+        $(target).find('span.value').html(ratio).css({
             'color': ratioText
         });
 
-        $(target).find('span.value').html(ratioRating).css({
+        $(target).find('em.value').html(ratioRating).css({
             'color': ratioText
         });
     };
@@ -277,14 +270,11 @@ LixCalculator.Formula.Lix = (function ($) {
     Lix.prototype.output = function(lix, readability) {
         var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
 
-        LixCalculator.Formula.Total.appendTotal(100-lix, 100);
-        lix = 100 - lix + '%';
-
-        $(target).find('em.value').html(lix).css({
+        $(target).find('span.value').html(lix).css({
             'color': readability.textColor
         });
 
-        $(target).find('span.value').html(readability.value).css({
+        $(target).find('em.value').html(readability.value).css({
             'color': readability.textColor
         });
     };
@@ -300,13 +290,13 @@ LixCalculator.Formula.Lix = (function ($) {
 
         if (lix < 30) {
             value = LixCalculatorLang.lix.very_easy;
-            textColor = '#098400';
+            textColor = '#5DAE00';
         } else if (lix > 29 && lix < 41) {
             value = LixCalculatorLang.lix.easy;
             textColor = '#5DAE00';
         } else if (lix > 40 && lix < 51) {
             value = LixCalculatorLang.lix.moderate;
-            textColor = '#FFDC00';
+            textColor = '#FFB700';
         } else if (lix > 50 && lix < 61) {
             value = LixCalculatorLang.lix.hard;
             textColor = '#FF9600';
@@ -330,11 +320,11 @@ LixCalculator.Formula.Lix = (function ($) {
      */
     Lix.prototype.calculate = function(words, longWords, sentences) {
         if (words === 0) {
-            return 100;
+            return 0;
         }
 
         var lix = (words/sentences) + ((longWords/words) * 100);
-        return lix.toFixed(2);
+        return lix.toFixed(0);
     };
 
     /**
@@ -438,31 +428,28 @@ LixCalculator.Formula.Paragraph = (function ($) {
         var ratioText = '#5DAE00';
         var ratioRating = LixCalculatorLang.paragraph.good;
 
+        ratio = ratio.toFixed(0);
+
         if (ratio < 1) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.low;
         }
 
-        if (ratio >= 5) {
+        if (ratio == 5) {
+            ratioText = '#FFB700';
+            ratioRating = LixCalculatorLang.total.ok;
+        }
+
+        if (ratio >= 6) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
-        ratio = ratio * 100;
-
-        if (ratio > 100 && ratio < 500) {
-            ratio = 100;
-        }
-
-        LixCalculator.Formula.Total.appendTotal(ratio, 100);
-
-        ratio = ratio.toFixed(2) + '%';
-
-        $(target).find('em.value').html(ratio).css({
+        $(target).find('span.value').html(ratio).css({
             'color': ratioText
         });
 
-        $(target).find('span.value').html(ratioRating).css({
+        $(target).find('em.value').html(ratioRating).css({
             'color': ratioText
         });
     };
@@ -497,77 +484,5 @@ LixCalculator.Formula.Paragraph = (function ($) {
     };
 
     return new Paragraph();
-
-})(jQuery);
-
-LixCalculator = LixCalculator || {};
-LixCalculator.Formula = LixCalculator.Formula || {};
-
-LixCalculator.Formula.Total = (function ($) {
-
-    var _formulaId = 'total';
-
-    var totalCurrent = 0;
-    var totalMax = 0;
-    var totalPercent = 0;
-
-    function Total() {
-        this.formulaId = _formulaId;
-        LixCalculator.addFormula(this, LixCalculatorLang.total.title, LixCalculatorLang.total.description, 1000);
-    }
-
-    /**
-     * Initialize
-     * @param  {string} content Text content to base calculations on
-     * @return {void}
-     */
-    Total.prototype.init = function(content) {
-
-    };
-
-    Total.prototype.appendTotal = function(current, max) {
-        totalCurrent = totalCurrent + current;
-        totalMax = totalMax + max;
-
-        totalPercent = (totalCurrent/totalMax) * 100;
-        totalPercent = totalPercent.toFixed(2);
-
-        this.output(totalPercent);
-    };
-
-    Total.prototype.output = function(percent) {
-        var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
-
-        var percentText = '#f2b127';
-        var percentRating = LixCalculatorLang.total.ok;
-
-        if (percent < 40) {
-            percentText = '#FF1300';
-            percentRating = LixCalculatorLang.total.bad;
-        }
-
-        if (percent >= 60) {
-            percentText = '#5DAE00';
-            percentRating = LixCalculatorLang.total.good;
-        }
-
-        percent = percent + '%';
-
-        $(target).find('em.value').html(percent).css({
-            'color': percentText
-        });
-
-        $(target).find('span.value').html(percentRating).css({
-            'color': percentText
-        });
-    };
-
-    Total.prototype.resetTotal = function() {
-        totalCurrent = 0;
-        totalMax = 0;
-        totalPercent = 0;
-    };
-
-    return new Total();
 
 })(jQuery);

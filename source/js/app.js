@@ -84,8 +84,6 @@ var LixCalculator = (function ($) {
      * @return {void}
      */
     LixCalculator.prototype.calculate = function(type, content, raw) {
-        this.Formula.Total.resetTotal();
-
         $.each(formulas, function (index, formula) {
             formula.obj.init(content, raw);
         }.bind(this));

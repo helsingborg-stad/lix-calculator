@@ -32,14 +32,11 @@ LixCalculator.Formula.Lix = (function ($) {
     Lix.prototype.output = function(lix, readability) {
         var target = '#lix-calculator-' + LixCalculator.slugify(this.formulaId);
 
-        LixCalculator.Formula.Total.appendTotal(100-lix, 100);
-        lix = 100 - lix + '%';
-
-        $(target).find('em.value').html(lix).css({
+        $(target).find('span.value').html(lix).css({
             'color': readability.textColor
         });
 
-        $(target).find('span.value').html(readability.value).css({
+        $(target).find('em.value').html(readability.value).css({
             'color': readability.textColor
         });
     };
@@ -55,13 +52,13 @@ LixCalculator.Formula.Lix = (function ($) {
 
         if (lix < 30) {
             value = LixCalculatorLang.lix.very_easy;
-            textColor = '#098400';
+            textColor = '#5DAE00';
         } else if (lix > 29 && lix < 41) {
             value = LixCalculatorLang.lix.easy;
             textColor = '#5DAE00';
         } else if (lix > 40 && lix < 51) {
             value = LixCalculatorLang.lix.moderate;
-            textColor = '#FFDC00';
+            textColor = '#FFB700';
         } else if (lix > 50 && lix < 61) {
             value = LixCalculatorLang.lix.hard;
             textColor = '#FF9600';
@@ -85,11 +82,11 @@ LixCalculator.Formula.Lix = (function ($) {
      */
     Lix.prototype.calculate = function(words, longWords, sentences) {
         if (words === 0) {
-            return 100;
+            return 0;
         }
 
         var lix = (words/sentences) + ((longWords/words) * 100);
-        return lix.toFixed(2);
+        return lix.toFixed(0);
     };
 
     /**

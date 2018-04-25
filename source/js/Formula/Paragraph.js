@@ -33,31 +33,28 @@ LixCalculator.Formula.Paragraph = (function ($) {
         var ratioText = '#5DAE00';
         var ratioRating = LixCalculatorLang.paragraph.good;
 
+        ratio = ratio.toFixed(0);
+
         if (ratio < 1) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.low;
         }
 
-        if (ratio >= 5) {
+        if (ratio == 5) {
+            ratioText = '#FFB700';
+            ratioRating = LixCalculatorLang.total.ok;
+        }
+
+        if (ratio >= 6) {
             ratioText = '#FF1300';
             ratioRating = LixCalculatorLang.paragraph.high;
         }
 
-        ratio = ratio * 100;
-
-        if (ratio > 100 && ratio < 500) {
-            ratio = 100;
-        }
-
-        LixCalculator.Formula.Total.appendTotal(ratio, 100);
-
-        ratio = ratio.toFixed(2) + '%';
-
-        $(target).find('em.value').html(ratio).css({
+        $(target).find('span.value').html(ratio).css({
             'color': ratioText
         });
 
-        $(target).find('span.value').html(ratioRating).css({
+        $(target).find('em.value').html(ratioRating).css({
             'color': ratioText
         });
     };
