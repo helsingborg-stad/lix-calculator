@@ -19,14 +19,10 @@ define('LIXCALCULATOR_TEMPLATE_PATH', LIXCALCULATOR_PATH . 'templates/');
 
 load_plugin_textdomain('lix-calculator', false, plugin_basename(dirname(__FILE__)) . '/languages');
 
-require_once LIXCALCULATOR_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
-//require_once KLARSPRAK_PATH . 'Public.php';
-
-// Instantiate and register the autoloader
-$loader = new LixCalculator\Vendor\Psr4ClassLoader();
-$loader->addPrefix('LixCalculator', LIXCALCULATOR_PATH);
-$loader->addPrefix('LixCalculator', LIXCALCULATOR_PATH . 'source/php/');
-$loader->register();
+// Autoload from plugin
+if (file_exists(LIXCALCULATOR_PATH . 'vendor/autoload.php')) {
+    require_once LIXCALCULATOR_PATH . 'vendor/autoload.php';
+}
 
 // Start application
 new LixCalculator\App();
