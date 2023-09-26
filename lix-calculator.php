@@ -4,7 +4,7 @@
  * Plugin Name: Lix Calculator
  * Plugin URI: https://github.com/helsingborg-stad/lix-calculator
  * Description: A plugin that calculates a posts lix value.
- * Version: 1.0.0
+ * Version: 3.0.0
  * Author: Kristoffer Svanmark
  * Author URI: https://github.com/helsingborg-stad
  * Text Domain: lix-calculator
