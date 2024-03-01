@@ -1,3 +1,8 @@
+import Headline from './Formula/Headline';
+import Lix from './Formula/Lix';
+import Moretag from './Formula/MoreTag';
+import Paragraph from './Formula/Paragraph';
+
 var LixCalculator = (function ($) {
     
     // Elements
