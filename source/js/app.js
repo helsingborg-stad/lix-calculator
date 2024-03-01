@@ -1,5 +1,5 @@
 var LixCalculator = (function ($) {
-
+    
     // Elements
     var $metaBox = $('#lix-calculator-content');
 
