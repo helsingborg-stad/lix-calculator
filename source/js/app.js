@@ -1,5 +1,10 @@
+import { headline } from './Formula/Headline';
+import { paragraph } from './Formula/Paragraph';
+import { lix } from './Formula/Lix';
+import { moreTag } from './Formula/MoreTag';
+
 var LixCalculator = (function ($) {
-    
+
     // Elements
     var $metaBox = $('#lix-calculator-content');
 
@@ -163,3 +168,12 @@ var LixCalculator = (function ($) {
     return new LixCalculator();
 
 })(jQuery);
+
+
+
+
+
+headline(LixCalculator);
+lix(LixCalculator);
+moreTag(LixCalculator);
+paragraph(LixCalculator);
