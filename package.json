@@ -1,5 +1,5 @@
 {
-    "name": "lix-calculator",
+    "name": "@helsingborg-stad/lix-calculator",
     "version": "4.1.1",
     "description": "",
     "main": "",
@@ -10,7 +10,7 @@
     "author": "Helsingborg Stad",
     "license": "MIT",
     "bugs": {
-        "url": ""
+        "url": "https://github.com/helsingborg-stad/lix-calculator/issues"
     },
     "homepage": "https://github.com/helsingborg-stad/lix-calculator",
     "scripts": {
@@ -23,6 +23,7 @@
         "> 1%",
         "not dead"
     ],
+    "files": ["dist/"],
     "devDependencies": {
         "autoprefixer": "^10.4.2",
         "clean-webpack-plugin": "^4.0.0",
